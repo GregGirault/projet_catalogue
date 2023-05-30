@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Login</title>
 </head>
 <body>
+    <div class="container">
     <h2>Connexion</h2>
-    <form action=""  method="POST">
+    <form action="verification.php"  method="POST">
     <div>
     <label for="username">Nom utilisateur</label>
     <input type="text" name="username" id="username" placeholder="Entrez le nom d'utilisateur">
@@ -22,10 +24,11 @@
         if (isset($_GET['erreur'])) {
             $err = $_GET['erreur'];
             if ($err == 1 || $err == 2) {
-                echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
+                echo "<p style='color:#ff4800'>Utilisateur ou mot de passe incorrect</p>";
             }
         }
     ?>
     </form>
+    </div>
 </body>
 </html>

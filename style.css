@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    width: 25%;
+    padding: 80px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+h2 {
+    text-align: center;
+    color: #6c757d; 
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #3a4f5c; 
+    font-size: 18px;
+}
+
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ccc;
+    background-color: #f9f1e9;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    color: #333333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #ffaa3b;
+    background-color: #fff7e7;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to right, #fbc2b5, #ffd7a3);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    animation: pulse 3.2s ease-in;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    16% {
+        transform: scale(1.05);
+    }
+    33% {
+        transform: scale(1);
+    }
+    49%{
+        transform: scale(1.05);
+    }
+    66%{
+        transform: scale(1);
+    }
+    83%{
+        transform: scale(1.05);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(to right, #f47b4d, #f9a66f);
+}
+
+p.error-message {
+    color: #ff4800;
+    margin-top: 10px;
+    text-align: center;
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
