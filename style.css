@@ -16,7 +16,7 @@ body {
     background-color: #f7f7f7;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    animation: slideIn 0.5s ease;
+    animation: slideIn 1.5s ease;
 }
 
 @keyframes slideIn {
@@ -110,20 +110,3 @@ input[type="submit"]:hover {
     background: linear-gradient(to right, #f47b4d, #f9a66f);
 }
 
-p.error-message {
-    color: #ff4800;
-    margin-top: 10px;
-    text-align: center;
-    animation: slideUp 0.5s ease;
-}
-
-@keyframes slideUp {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
