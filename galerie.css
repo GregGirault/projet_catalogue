@@ -13,6 +13,9 @@ body {line-height:1.5;
 
 .row { display:flex;
        flex-wrap: wrap;}
+       
+       img{ max-width: 100%;
+            vertical-align: middle;}
 
 .gallery { width: 100%;
            display:block;
@@ -41,6 +44,6 @@ body {line-height:1.5;
             border-color:#ff9800;
         }
         .gallery .gallery-item {
-            width:calc(100% / 3);
+            colum
             padding: 15px;
         }
