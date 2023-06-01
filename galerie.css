@@ -1,0 +1,46 @@
+body {line-height:1.5;
+      font-family:sans-serif; }
+* { margin:0;
+    box-sizing:border-box;
+
+}
+
+.container { max-width: 1170px;
+             margin:auto;
+             }
+             img{ max-width: 100%;
+                  vertical-align: middle ;}
+
+.row { display:flex;
+       flex-wrap: wrap;}
+
+.gallery { width: 100%;
+           display:block;
+           min-height:100vh;
+           background-color: #2a2932;
+           padding:100px 0;
+        }
+        .gallery .gallery-filter { 
+                                   padding:0 15px;
+                                   width:100%;
+                                   text-align:center;
+                                margin-bottom:20px;}
+        .gallery .gallery-filter .filter-item{
+        color:#ffffff;
+        font-size:18px;
+        text-transform: uppercase;
+        display:inline-block;
+        margin:0 10px;
+        cursor:pointer;
+        border-bottom: 2px solid transparent;
+        line-height:1.2;
+        transition: all 0.3s ease;
+        }
+        .gallery .gallery-filter .filter-item.active { 
+            color:#ff9800;
+            border-color:#ff9800;
+        }
+        .gallery .gallery-item {
+            width:calc(100% / 3);
+            padding: 15px;
+        }
