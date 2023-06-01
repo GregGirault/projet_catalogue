@@ -1,34 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Login</title>
-</head>
-<body>
-    <div class="container">
-    <h2>Connexion</h2>
-    <form action="verification.php"  method="POST">
-    <div>
-    <label for="username">Nom utilisateur</label>
-    <input type="text" name="username" id="username" placeholder="Entrez le nom d'utilisateur">
-    </div>
-    <div>
-        <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" placeholder="Entrez le mot de passe">
-    </div>
-    <input type="submit" value="Connexion">
-    <?php
-        if (isset($_GET['erreur'])) {
-            $err = $_GET['erreur'];
-            if ($err == 1 || $err == 2) {
-                echo "<p style='color:#ff4800'>Utilisateur ou mot de passe incorrect</p>";
-            }
-        }
-    ?>
-    </form>
-    </div>
-</body>
+<html>
+ <head>
+ <meta charset="utf-8">
+ <!-- importer le fichier de style -->
+ <link rel="stylesheet" href="login.css" media="screen" type="text/css" />
+ 
+ </head>
+ <body>
+ <div id="container">
+ <!-- zone de connexion -->
+ 
+ <form action="verification.php" method="POST">
+ <h1>Connexion</h1>
+ 
+ <label><b>Nom d'utilisateur</b></label>
+ <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
+
+ <label><b>Mot de passe</b></label>
+ <input type="password" placeholder="Entrer le mot de passe" name="password" required>
+
+ <input type="submit" id='submit' value='LOGIN' >
+
+ <?php
+ if(isset($_GET['erreur'])){
+ $err = $_GET['erreur'];
+ if($err==1 || $err==2)
+ echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
+ }
+ ?>
+ </form>
+
+
+ </div>
+ </body>
 </html>

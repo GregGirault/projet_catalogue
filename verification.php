@@ -2,43 +2,46 @@
 session_start();
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $db_host = 'localhost';
-    $db_name = 'catalogue';
+    // Connexion à la base de données
     $db_username = 'root';
     $db_password = '';
+    $db_name = 'catalogue';
+    $db_host = 'localhost';
+    $db = mysqli_connect($db_host, $db_username, $db_password, $db_name)
+        or die('Could not connect to database');
 
-    try {
-        $db = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_username, $db_password);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        die('Erreur de connexion à la base de données : ' . $e->getMessage());
-    }
-
-    $username = htmlspecialchars($_POST['username']);
-    $password = htmlspecialchars($_POST['password']);
+    // Échapper les valeurs des champs de saisie
+    $username = mysqli_real_escape_string($db, htmlspecialchars($_POST['username']));
+    $password = mysqli_real_escape_string($db, htmlspecialchars($_POST['password']));
 
     if ($username !== "" && $password !== "") {
-        $sql = "SELECT COUNT(*) FROM utilisateur WHERE username = :username AND password = :password";
-        $query = $db->prepare($sql);
-        $query->bindParam(':username', $username, PDO::PARAM_STR);
-        $query->bindParam(':password', $password, PDO::PARAM_STR);
-        $query->execute();
-        $count = $query->fetchColumn();
+        $query = "SELECT * FROM users WHERE username = '".$username."'";
+        $result = mysqli_query($db, $query);
 
-        if ($count != 0) {
-            $_SESSION['authenticated'] = true;
-            $_SESSION['username'] = $username;
-            header('Location: historique.php'); // Page de redirection vers le tableau de bord
-            exit();
-        } else {
-            header('Location: login.php?erreur=1');
-            exit();
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $hashedPassword = $row['password'];
+
+            // Vérifier le mot de passe haché
+            if (password_verify($password, $hashedPassword)) {
+                $_SESSION['username'] = $username;
+                header('Location: historique.php');
+                exit;
+            }
         }
+
+        // Redirection en cas d'échec de connexion
+        header('Location: login.php?erreur=1'); // Utilisateur ou mot de passe incorrect
+        exit;
     } else {
-        header('Location: login.php?erreur=2');
-        exit();
+        header('Location: login.php?erreur=2'); // Utilisateur ou mot de passe vide
+        exit;
     }
 } else {
     header('Location: login.php');
-    exit();
+    exit;
 }
+
+mysqli_close($db); // Fermer la connexion
+
+?>
