@@ -28,7 +28,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if ($count != 0) {
             $_SESSION['authenticated'] = true;
             $_SESSION['username'] = $username;
-            header('Location: php'); // Page de redirection vers le tableau de bord
+            header('Location: historique.php'); // Page de redirection vers le tableau de bord
             exit();
         } else {
             header('Location: login.php?erreur=1');
