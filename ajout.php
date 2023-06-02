@@ -1,39 +1,46 @@
 <?php
 session_start();
-if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
-    header("Location: login.php");
-    exit();
-}
 
 require_once("connect.php");
 
 if ($_POST) {
     if (
         isset($_POST["objet"]) && isset($_POST["description"]) &&
-        isset($_POST["image"]) && isset($_POST["categorie_id"])
+        isset($_FILES["image"]) && isset($_POST["categorie_id"])&&
+        isset($_POST["ingredients"])
     ) {
         $objet = strip_tags($_POST["objet"]);
         $description = strip_tags($_POST["description"]);
-        $image = strip_tags($_POST["image"]);
-        $categorie_id = strip_tags($_POST["categorie_id"]);
+        $ingredients = strip_tags($_POST["ingredients"]);
 
-        $sql = "INSERT INTO produits (objet, description, image, categorie_id)
-        VALUES (:objet, :description, :image, :categorie_id)";
-        $query = $db->prepare($sql);
-        $query->bindValue(":objet", $objet, PDO::PARAM_STR);
-        $query->bindValue(":description", $description, PDO::PARAM_STR);
-        $query->bindValue(":image", $image, PDO::PARAM_STR);
-        $query->bindValue(":categorie_id", $categorie_id, PDO::PARAM_INT);
-        $success = $query->execute();
+        // Gérer le téléchargement de l'image
+        $image = $_FILES["image"]["name"]; // Nom du fichier téléchargé
+        $image_temp = $_FILES["image"]["tmp_name"]; // Chemin temporaire du fichier téléchargé
+        $image_destination = './image/' . $image; // Chemin de destination du fichier
 
-        if ($success) {
-            $_SESSION["toast_message"] = "Produit ajouté avec succès";
-            $_SESSION["toast_type"] = "success";
+        if (move_uploaded_file($image_temp, $image_destination)) {
+            // Image téléchargée avec succès
+            $categorie_id = strip_tags($_POST["categorie_id"]);
 
-            header("Location: ajout.php");
-            exit();
+            // ... le reste du code pour la base de données ...
+
+            $sql = "INSERT INTO produits (objet, description, ingredients, image, categorie_id)
+            VALUES (:objet, :description, :ingredients, :image, :categorie_id)";
+            $query = $db->prepare($sql);
+            $query->bindValue(":objet", $objet, PDO::PARAM_STR);
+            $query->bindValue(":description", $description, PDO::PARAM_STR);
+            $query->bindValue(":ingredients", $ingredients, PDO::PARAM_STR);
+            $query->bindValue(":image", $image, PDO::PARAM_STR);
+            $query->bindValue(":categorie_id", $categorie_id, PDO::PARAM_INT);
+            $success = $query->execute();
+
+            if ($success) {
+                // ... le reste du code pour la redirection et les messages ...
+            } else {
+                $error = "Erreur lors de l'ajout du produit : " . $query->errorInfo()[2];
+            }
         } else {
-            $error = "Erreur lors de l'ajout du produit : " . $query->errorInfo()[2];
+            $error = "Une erreur est survenue lors du téléchargement de l'image.";
         }
     }
 }
@@ -44,6 +51,7 @@ $categories = $query_categories->fetchAll();
 
 require_once("close.php");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +69,7 @@ require_once("close.php");
     <?php if (isset($error)) : ?>
         <div class="text-red-500 text-center"><?= $error ?></div>
     <?php endif; ?>
-    <form method="post" class="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-md">
+    <form method="post" class="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-md" enctype="multipart/form-data">
         <div class="mb-4">
             <label for="objet" class="block font-bold text-gray-700">Objet</label>
             <input type="text" name="objet" required class="form-input mt-1">
@@ -71,15 +79,41 @@ require_once("close.php");
             <textarea name="description" required class="form-textarea mt-1"></textarea>
         </div>
         <div class="mb-4">
-            <label for="image" class="block font-bold text-gray-700">Image</label>
-            <input type="text" name="image" class="form-input mt-1">
+            <label for="ingredients" class="block font-bold text-gray-700">Ingredients</label>
+            <textarea name="ingredients" required class="form-textarea mt-1"></textarea>
+        </div>
+
+
+
+
+     <?php
+        if (isset($_POST['envoyer'])) {
+            $dossierTempo = $_FILES['image']['tmp_name'];
+            $dossierSite = './image/' . $_FILES['image']['name'];
+
+            $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
+            chmod('./image', 0777);
+
+            if ($deplacer) {
+
+                echo 'Image envoyée avec succès';
+            } else {
+                echo 'Une erreur est survenue.';
+            }
+        }
+        ?>   
+
+
+
+        <div class="mb-4">
+            <label for="upload">Envoyer image</label>
+            <input type="file" name="image" id="upload">
+
         </div>
         <div class="mb-4">
             <label for="categorie_id" class="block font-bold text-gray-700">Catégorie</label>
             <select name="categorie_id" class="form-select mt-1">
-                <option value="shampoing">Shampoing</option>
-                <option value="parfum">Parfum</option>
-                <option value="déodorant">Déodorant</option>
+
                 <?php foreach ($categories as $cat) : ?>
                     <option value="<?= $cat['id'] ?>"><?= $cat['objet'] ?></option>
                 <?php endforeach; ?>
@@ -89,6 +123,7 @@ require_once("close.php");
             <input type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer" value="Ajouter">
         </div>
         <div class="flex justify-center mt-4">
+            <a href="historique.php"class="text-blue-500">Historique</a>
             <a href="modifier.php?id=<?= $produit_id ?>" class="text-blue-500">Modifier</a>
             <a href="supprimer.php?id=<?= $produit_id ?>" class="text-red-500">Supprimer</a>
             <a href="ajout.php"><span class="text-gray-500">Retour</span></a>
