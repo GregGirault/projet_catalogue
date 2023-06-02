@@ -148,7 +148,7 @@ require_once("close.php");
         </ul>
     </nav>
 
-
+                <a href="ajout.php">Ajouter</a>
 
 
     <br><br>

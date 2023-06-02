@@ -13,7 +13,7 @@
 
 <!-- <body>
     <header>
-        <h1>Rosalie Détour</h1>
+        
         <nav>
             <ul>
                 <li><a href="#">Accueil</a></li>
