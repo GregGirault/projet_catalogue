@@ -1,21 +1,19 @@
 <?php
 session_start();
-if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
-    header("Location: login.php");
-    exit();
-}
 
 require_once("connect.php");
 
 if ($_POST) {
     if (
         isset($_POST["objet"]) && isset($_POST["description"]) &&
-        isset($_POST["image"]) && isset($_POST["categorie_id"])
+        isset($_FILES["image"]) && isset($_POST["categorie_id"])
     ) {
         $objet = strip_tags($_POST["objet"]);
         $description = strip_tags($_POST["description"]);
-        $image = strip_tags($_POST["image"]);
+        $image = $_FILES["image"]["name"]; // Nom du fichier téléchargé
         $categorie_id = strip_tags($_POST["categorie_id"]);
+
+        // ... le reste du code pour la base de données ...
 
         $sql = "INSERT INTO produits (objet, description, image, categorie_id)
         VALUES (:objet, :description, :image, :categorie_id)";
@@ -27,11 +25,8 @@ if ($_POST) {
         $success = $query->execute();
 
         if ($success) {
-            $_SESSION["toast_message"] = "Produit ajouté avec succès";
-            $_SESSION["toast_type"] = "success";
+            // ... le reste du code pour la redirection et les messages ...
 
-            header("Location: ajout.php");
-            exit();
         } else {
             $error = "Erreur lors de l'ajout du produit : " . $query->errorInfo()[2];
         }
@@ -44,6 +39,7 @@ $categories = $query_categories->fetchAll();
 
 require_once("close.php");
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +57,7 @@ require_once("close.php");
     <?php if (isset($error)) : ?>
         <div class="text-red-500 text-center"><?= $error ?></div>
     <?php endif; ?>
-    <form method="post" class="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-md">
+    <form method="post" class="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-md" enctype="multipart/form-data">
         <div class="mb-4">
             <label for="objet" class="block font-bold text-gray-700">Objet</label>
             <input type="text" name="objet" required class="form-input mt-1">
@@ -70,16 +66,34 @@ require_once("close.php");
             <label for="description" class="block font-bold text-gray-700">Description</label>
             <textarea name="description" required class="form-textarea mt-1"></textarea>
         </div>
+
+
+        <?php
+if(isset($_POST['envoyer'])) {
+    $dossierTempo = $_FILES['image']['tmp_name'];
+$dossierSite = './image/'.$_FILES['image']['name'];
+
+    $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
+
+    if($deplacer) {
+       
+        echo 'Image envoyée avec succès';
+    } else {
+        echo 'Une erreur est survenue.';
+    }
+}
+?>
+
+
         <div class="mb-4">
-            <label for="image" class="block font-bold text-gray-700">Image</label>
-            <input type="text" name="image" class="form-input mt-1">
+        <label for="upload">Envoyer image</label>
+        <input type="file" name="image" id="upload">
+
         </div>
         <div class="mb-4">
             <label for="categorie_id" class="block font-bold text-gray-700">Catégorie</label>
             <select name="categorie_id" class="form-select mt-1">
-                <option value="shampoing">Shampoing</option>
-                <option value="parfum">Parfum</option>
-                <option value="déodorant">Déodorant</option>
+             
                 <?php foreach ($categories as $cat) : ?>
                     <option value="<?= $cat['id'] ?>"><?= $cat['objet'] ?></option>
                 <?php endforeach; ?>
