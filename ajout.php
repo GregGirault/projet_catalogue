@@ -10,25 +10,34 @@ if ($_POST) {
     ) {
         $objet = strip_tags($_POST["objet"]);
         $description = strip_tags($_POST["description"]);
+
+        // Gérer le téléchargement de l'image
         $image = $_FILES["image"]["name"]; // Nom du fichier téléchargé
-        $categorie_id = strip_tags($_POST["categorie_id"]);
+        $image_temp = $_FILES["image"]["tmp_name"]; // Chemin temporaire du fichier téléchargé
+        $image_destination = './image/' . $image; // Chemin de destination du fichier
 
-        // ... le reste du code pour la base de données ...
+        if (move_uploaded_file($image_temp, $image_destination)) {
+            // Image téléchargée avec succès
+            $categorie_id = strip_tags($_POST["categorie_id"]);
 
-        $sql = "INSERT INTO produits (objet, description, image, categorie_id)
-        VALUES (:objet, :description, :image, :categorie_id)";
-        $query = $db->prepare($sql);
-        $query->bindValue(":objet", $objet, PDO::PARAM_STR);
-        $query->bindValue(":description", $description, PDO::PARAM_STR);
-        $query->bindValue(":image", $image, PDO::PARAM_STR);
-        $query->bindValue(":categorie_id", $categorie_id, PDO::PARAM_INT);
-        $success = $query->execute();
+            // ... le reste du code pour la base de données ...
 
-        if ($success) {
-            // ... le reste du code pour la redirection et les messages ...
+            $sql = "INSERT INTO produits (objet, description, image, categorie_id)
+            VALUES (:objet, :description, :image, :categorie_id)";
+            $query = $db->prepare($sql);
+            $query->bindValue(":objet", $objet, PDO::PARAM_STR);
+            $query->bindValue(":description", $description, PDO::PARAM_STR);
+            $query->bindValue(":image", $image, PDO::PARAM_STR);
+            $query->bindValue(":categorie_id", $categorie_id, PDO::PARAM_INT);
+            $success = $query->execute();
 
+            if ($success) {
+                // ... le reste du code pour la redirection et les messages ...
+            } else {
+                $error = "Erreur lors de l'ajout du produit : " . $query->errorInfo()[2];
+            }
         } else {
-            $error = "Erreur lors de l'ajout du produit : " . $query->errorInfo()[2];
+            $error = "Une erreur est survenue lors du téléchargement de l'image.";
         }
     }
 }
@@ -68,32 +77,35 @@ require_once("close.php");
         </div>
 
 
-        <?php
-if(isset($_POST['envoyer'])) {
-    $dossierTempo = $_FILES['image']['tmp_name'];
-$dossierSite = './image/'.$_FILES['image']['name'];
 
-    $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
+     <?php
+        if (isset($_POST['envoyer'])) {
+            $dossierTempo = $_FILES['image']['tmp_name'];
+            $dossierSite = './image/' . $_FILES['image']['name'];
 
-    if($deplacer) {
-       
-        echo 'Image envoyée avec succès';
-    } else {
-        echo 'Une erreur est survenue.';
-    }
-}
-?>
+            $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
+            chmod('./image', 0777);
+
+            if ($deplacer) {
+
+                echo 'Image envoyée avec succès';
+            } else {
+                echo 'Une erreur est survenue.';
+            }
+        }
+        ?>   
+
 
 
         <div class="mb-4">
-        <label for="upload">Envoyer image</label>
-        <input type="file" name="image" id="upload">
+            <label for="upload">Envoyer image</label>
+            <input type="file" name="image" id="upload">
 
         </div>
         <div class="mb-4">
             <label for="categorie_id" class="block font-bold text-gray-700">Catégorie</label>
             <select name="categorie_id" class="form-select mt-1">
-             
+
                 <?php foreach ($categories as $cat) : ?>
                     <option value="<?= $cat['id'] ?>"><?= $cat['objet'] ?></option>
                 <?php endforeach; ?>
