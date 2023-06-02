@@ -8,10 +8,11 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding-top: 80px;
 }
 
 h1 {
-    color: #888;
+  color: #888;
   position: absolute;
   top: 0;
   left: 0;
@@ -42,19 +43,8 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  animation: slideIn 1s ease-in-out;
-}
-
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 1s ease-in-out;
 }
 
 .card-image {
@@ -70,15 +60,18 @@ h1 {
   object-fit: cover;
   border-radius: 50%;
   margin-left: 17px;
-  animation: rotate 1.5s ease-in-out ;
+  margin-top: 8px;
+  animation: fadeInImage 1s ease-in-out;
 }
 
-@keyframes rotate {
+@keyframes fadeInImage {
   0% {
-    transform: rotate(0);
+    opacity: 0;
+    transform: scale(0.5);
   }
   100% {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -87,7 +80,6 @@ h1 {
   text-align: center;
   animation: fadeIn 1s ease-in-out;
 }
-
 
 .card-description h2 {
   font-size: 18px;
@@ -100,6 +92,187 @@ h1 {
   line-height: 1.5;
 }
 
+.card-container {
+  position: relative;
+  overflow: hidden;
+}
 
+.slide-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  transform: translateX(-100%);
+  transition: transform 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  opacity: 0;
+  box-shadow: 0 2px 3px black;
+}
 
+.card-container:hover .slide-content {
+  transform: translateX(0);
+  opacity: 1;
+}
 
+.slide-content h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.slide-content p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.slide-content ul {
+  list-style-type: none;
+  padding-left: 20px;
+  position: relative;
+}
+
+.slide-content ul li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  animation: fadeList 1s ease-in-out;
+}
+
+.slide-content ul li:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 10px;
+  height: 2px;
+  background-color: #333;
+  transform: translateY(-50%);
+}
+
+@keyframes fadeList {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+header {
+  background: linear-gradient(to right, #F6E7D7, #FECF7A);
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2; 
+}
+
+header h1 {
+  font-size: 24px;
+  color: #333;
+  margin-top: 0;
+  position: relative; 
+  z-index: 3; 
+}
+
+header nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  animation: fadeInImage 1s ease-in-out;
+}
+
+header nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+header nav ul li a:hover {
+  background: linear-gradient(to right, #F6E7D7, #FFFFFF);
+  color: #333
+}
+
+footer {
+  background: linear-gradient(to right, #FECF7A, #F6E7D7);
+  padding: 10px 20px; 
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 9.5%;
+  animation: fadeSlideUp 1s ease-in-out;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+footer h2 {
+  font-size: 18px; 
+  color: #333;
+  margin-top: 5px;
+}
+
+footer p {
+  font-size: 14px; 
+  color: #666;
+  margin-bottom: -45px;
+}
+
+footer nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+footer nav ul li {
+  margin-right: 10px;
+}
+
+footer nav ul li a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+footer nav ul li a:hover {
+  background: linear-gradient(to right, #F6E7D7, #FFFFFF);
+  color: #333
+}
