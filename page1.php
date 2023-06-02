@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <h1>Rosalie Détour</h1>
+        
         <nav>
             <ul>
                 <li><a href="#">Accueil</a></li>
@@ -22,6 +22,9 @@
             </ul>
         </nav>
     </header>
+
+
+    <h1><?php  ?></h1>
     <div class="card-container">
         <div class="card">
             <div class="card-image">

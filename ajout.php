@@ -6,10 +6,12 @@ require_once("connect.php");
 if ($_POST) {
     if (
         isset($_POST["objet"]) && isset($_POST["description"]) &&
-        isset($_FILES["image"]) && isset($_POST["categorie_id"])
+        isset($_FILES["image"]) && isset($_POST["categorie_id"])&&
+        isset($_POST["ingredients"])
     ) {
         $objet = strip_tags($_POST["objet"]);
         $description = strip_tags($_POST["description"]);
+        $ingredients = strip_tags($_POST["ingredients"]);
 
         // Gérer le téléchargement de l'image
         $image = $_FILES["image"]["name"]; // Nom du fichier téléchargé
@@ -22,11 +24,12 @@ if ($_POST) {
 
             // ... le reste du code pour la base de données ...
 
-            $sql = "INSERT INTO produits (objet, description, image, categorie_id)
-            VALUES (:objet, :description, :image, :categorie_id)";
+            $sql = "INSERT INTO produits (objet, description, ingredients, image, categorie_id)
+            VALUES (:objet, :description, :ingredients, :image, :categorie_id)";
             $query = $db->prepare($sql);
             $query->bindValue(":objet", $objet, PDO::PARAM_STR);
             $query->bindValue(":description", $description, PDO::PARAM_STR);
+            $query->bindValue(":ingredients", $ingredients, PDO::PARAM_STR);
             $query->bindValue(":image", $image, PDO::PARAM_STR);
             $query->bindValue(":categorie_id", $categorie_id, PDO::PARAM_INT);
             $success = $query->execute();
@@ -75,6 +78,11 @@ require_once("close.php");
             <label for="description" class="block font-bold text-gray-700">Description</label>
             <textarea name="description" required class="form-textarea mt-1"></textarea>
         </div>
+        <div class="mb-4">
+            <label for="ingredients" class="block font-bold text-gray-700">Ingredients</label>
+            <textarea name="ingredients" required class="form-textarea mt-1"></textarea>
+        </div>
+
 
 
 
@@ -115,6 +123,7 @@ require_once("close.php");
             <input type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer" value="Ajouter">
         </div>
         <div class="flex justify-center mt-4">
+            <a href="historique.php"class="text-blue-500">Historique</a>
             <a href="modifier.php?id=<?= $produit_id ?>" class="text-blue-500">Modifier</a>
             <a href="supprimer.php?id=<?= $produit_id ?>" class="text-red-500">Supprimer</a>
             <a href="ajout.php"><span class="text-gray-500">Retour</span></a>
