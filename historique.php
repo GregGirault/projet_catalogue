@@ -53,6 +53,9 @@ $query->bindValue(':parpage', $parPage, PDO::PARAM_INT);
 $query->execute();
 $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+
 require_once("close.php");
 ?>
 

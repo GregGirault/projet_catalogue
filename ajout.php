@@ -86,22 +86,36 @@ require_once("close.php");
 
 
 
-     <?php
-        if (isset($_POST['envoyer'])) {
-            $dossierTempo = $_FILES['image']['tmp_name'];
-            $dossierSite = './image/' . $_FILES['image']['name'];
+        <?php
+if (isset($_POST['envoyer'])) {
+    $dossierTempo = $_FILES['image']['tmp_name'];
+    $dossierSite = './image/' . $_FILES['image']['name'];
 
-            $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
-            chmod('./image', 0777);
+    $tailleMax = 3 * 1024 * 1024; 
 
-            if ($deplacer) {
 
-                echo 'Image envoyée avec succès';
-            } else {
-                echo 'Une erreur est survenue.';
-            }
-        }
-        ?>   
+    if ($_FILES['image']['size'] > $tailleMax) {
+        echo 'La taille du fichier dépasse la limite autorisée.';
+        // Arrêtez l'exécution du script ou effectuez une autre action appropriée.
+    }
+
+    $mime = mime_content_type($_FILES['image']['tmp_name']);
+    $allowedTypes = ['image/jpeg', 'image/png'];
+    if (!in_array($mime, $allowedTypes)) {
+        echo 'Type de fichier non autorisé.';
+        
+    }
+
+    $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
+    if ($deplacer) {
+        chmod($dossierSite, 0777); 
+
+        echo 'Image envoyée avec succès';
+    } else {
+        echo 'Une erreur est survenue lors du téléchargement du fichier.';
+    }
+}
+?>
 
 
 

@@ -3,19 +3,21 @@ session_start();
 require_once("connect.php");
 
 if ($_POST) {
-    if (isset($_POST["id"]) && isset($_POST["objet"]) && isset($_POST["description"]) && isset($_POST["image"]) && isset($_POST["categorie_id"])) {
+    if (isset($_POST["id"]) && isset($_POST["objet"]) && isset($_POST["description"]) && isset($_POST["ingredients"]) && isset($_POST["image"]) && isset($_POST["categorie_id"])) {
         $id = strip_tags($_POST["id"]);
         $objet = strip_tags($_POST["objet"]);
         $description = strip_tags($_POST["description"]);
+        $ingredients = strip_tags($_POST["ingredients"]);
         $image = strip_tags($_POST["image"]);
         $categorie_id = strip_tags($_POST["categorie_id"]);
 
         // Modifier le produit dans la table des produits
-        $sql = "UPDATE produits SET objet=:objet, description=:description, image=:image, categorie_id=:categorie_id WHERE id = :id";
+        $sql = "UPDATE produits SET objet=:objet, description=:description, ingredients=:ingredients, image=:image, categorie_id=:categorie_id WHERE id = :id";
         $query = $db->prepare($sql);
         $query->bindValue(":id", $id, PDO::PARAM_INT);
         $query->bindValue(":objet", $objet, PDO::PARAM_STR);
         $query->bindValue(":description", $description, PDO::PARAM_STR);
+        $query->bindValue(":ingredients", $ingredients, PDO::PARAM_STR);
         $query->bindValue(":image", $image, PDO::PARAM_STR);
         $query->bindValue(":categorie_id", $categorie_id, PDO::PARAM_INT);
         $query->execute();
@@ -23,7 +25,7 @@ if ($_POST) {
         $_SESSION["toast_message"] = "Produit $id modifié avec succès";
         $_SESSION["toast_type"] = "success";
 
-        header("Location: modifier.php?id=$id");
+        header("Location: historique.php");
         exit();
     }
 }
@@ -33,12 +35,16 @@ $id = "";
 if (isset($_GET["id"]) && !empty($_GET['id'])) {
     $id = strip_tags($_GET['id']);
 
-    // Récupérer les informations du produit depuis la table des produits
-    $sql = "SELECT * FROM produits WHERE id = :id";
-    $query = $db->prepare($sql);
-    $query->bindValue(":id", $id, PDO::PARAM_INT);
-    $query->execute();
-    $produit = $query->fetch();
+// Récupérer les informations du produit et de sa catégorie depuis les tables produits et categorie
+$sql = "SELECT p.*, c.objet AS categorie_objet 
+        FROM produits p
+        JOIN categorie c ON p.categorie_id = c.id
+        WHERE p.id = :id";
+$query = $db->prepare($sql);
+$query->bindValue(":id", $id, PDO::PARAM_INT);
+$query->execute();
+$produit = $query->fetch();
+
 } else {
     header("Location: login.php");
     exit();
@@ -71,13 +77,24 @@ require_once("close.php");
                 <textarea name="description" required class="form-textarea mt-1"><?= $produit['description'] ?></textarea>
             </div>
             <div class="mb-4">
+                <label for="ingredients" class="block font-bold text-gray-700">ingredients</label>
+                <textarea name="ingredients" required class="form-textarea mt-1"><?= $produit['ingredients'] ?></textarea>
+            </div>
+            <div class="mb-4">
                 <label for="image" class="block font-bold text-gray-700">Image</label>
                 <input type="text" name="image" required value="<?= $produit['image'] ?>" class="form-input mt-1">
             </div>
+
             <div class="mb-4">
-                <label for="categorie_id" class="block font-bold text-gray-700">Catégorie ID</label>
-                <input type="text" name="categorie_id" required value="<?= $produit['categorie_id'] ?>" class="form-input mt-1">
-            </div>
+    <label for="categorie_id" class="block font-bold text-gray-700">Catégorie</label>
+    <select name="categorie_id" class="form-select mt-1">
+        <option value="<?= $produit['categorie_id'] ?>" selected><?= $produit['categorie_objet'] ?></option>
+    </select>
+</div>
+
+
             <input type="hidden" value="<?= $produit["id"] ?>" name="id">
             <div class="flex justify-center">
                 <input type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer" value="Enregistrer">
+
+               

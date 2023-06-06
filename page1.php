@@ -1,3 +1,31 @@
+<?php include 'header.php'; ?>
+<?php require_once 'connect.php'; ?>
+
+<?php
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql_produits = "SELECT * FROM produits WHERE id = :id";
+    $query_produits = $db->prepare($sql_produits);
+    $query_produits->bindParam(':id', $id);
+    $query_produits->execute();
+    $produits = $query_produits->fetch();
+
+    if (isset($produits['description']) && isset($produits['ingredients'])) {
+        $description = $produits['description'];
+        $truncatedDescription = substr($description, 0, 400); // Tronque la description à 400 caractères
+        $ingredients = $produits['ingredients'];
+    } else {
+        // Gérer le cas où le produit n'a pas de description ou d'ingrédients
+        $description = "Description non disponible";
+        $ingredients = "Ingrédients non disponibles";
+    }
+} else {
+    // Gérer le cas où l'ID du produit n'est pas défini
+    $description = "Description non disponible";
+    $ingredients = "Ingrédients non disponibles";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,68 +34,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style_page1.css">
-    <title>Rosalie Détour</title>
+    <title><?= $produits['objet'] ?></title>
 </head>
 
-<?php include 'header.php'; ?>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-image">
+                <a href="<?php echo $produits['image']; ?>" data-lightbox="gallery">
+                    <img src="<?php echo $produits['image']; ?>" alt="parfum rosalie">
+                </a>
 
-<!-- <body>
-    <header>
-        
-        <nav>
-            <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Produits</a></li>
-                <li><a href="#">Catégories</a></li>
-                <li><a href="#">Contact</a></li>
-
-            </ul>
-        </nav>
-    </header> -->
-<!-- <h1>Rosalie Détour</h1> -->
-<div class="card-container">
-    <div class="card">
-        <div class="card-image">
-            <img src="./10.png" alt="Image de parfum">
+            </div>
         </div>
-        <div class="card-description">
-            <h2>Description</h2>
-            <p>Un parfum lumineux et énergisant qui capture l'éclat ensoleillé des pissenlits en plein épanouissement. Les
-                notes de tête fruitées d'orange sanguine et de pêche apportent une douceur juteuse, tandis qu'un bouquet
-                floral de pissenlit, de freesia et de magnolia ajoute une dimension florale élégante. Un fond de bois de
-                santal et de musc offre une chaleur subtile et un sillage irrésistible.</p>
+
+        <div class="slide-content">
+            <div class="card-description">
+                <h2>Description</h2>
+                <p id="myText"><?= $truncatedDescription ?></p>
+            </div>
+
+            <div class="card-description">
+                <h2>Ingrédients</h2>
+                <p><?= $ingredients ?></p>
+            </div>
         </div>
     </div>
-    <div class="slide-content ">
-        <h3>Ingrédients</h3>
-        <p>
-            Notre parfum Rosalie Détour est fabriqué avec des ingrédients de haute qualité, notamment :
-        </p>
-        <ul>
-            <li>Huiles essentielles naturelles</li>
-            <li>Extraits aromatiques concentrés obtenus à partir de matières premières naturelles</li>
-            <li>Notes de tête, de cœur et de fond soigneusement sélectionnées</li>
-            <li>Fixateurs pour assurer une tenue longue durée</li>
-            <li>Solvants respectueux de l'environnement</li>
-        </ul>
-        <p>Nous nous engageons à utiliser des ingrédients de la plus haute qualité pour créer une expérience parfumée
-            unique et envoûtante.</p>
-    </div>
-</div>
 
-<?php include 'footer.php'; ?>
-
-<!-- <footer>
-    <h2>Rosalie Détour</h2>
-    <p>&copy; 2023 Carte de Parfum. Tous droits réservés.</p>
-    <nav>
-        <ul>
-            <li><a href="#">Politique de confidentialité</a></li>
-            <li><a href="#">Conditions d'utilisation</a></li>
-        </ul>
-    </nav>
-</footer> -->
-
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>
