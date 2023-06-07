@@ -32,46 +32,46 @@ require_once("close.php");
     <link rel="stylesheet" href="galerie.css">
     <title>Galerie</title>
 
-    
+
 </head>
 
 <body>
 
 
 
-<section class="gallery">
-    <div class="container">
-        <div class="rowi">
-            <div class="gallery-filter">
-                <a href="galerie.php?categorie_id=all" class="filter-item" data-filter="all">All</a>
-                <a href="galerie.php?categorie_id=1" class="filter-item" data-filter="parfum">Parfum</a>
-                <a href="galerie.php?categorie_id=3" class="filter-item" data-filter="Déodorant">Déodorant</a>
-                <a href="galerie.php?categorie_id=2" class="filter-item" data-filter="Shampoing">Shampoing</a>
+    <section class="gallery">
+        <div class="container">
+            <div class="rowi">
+                <div class="gallery-filter">
+                    <a href="galerie.php?categorie_id=all" class="filter-item" data-filter="all">All</a>
+                    <a href="galerie.php?categorie_id=1" class="filter-item" data-filter="parfum">Parfum</a>
+                    <a href="galerie.php?categorie_id=3" class="filter-item" data-filter="Déodorant">Déodorant</a>
+                    <a href="galerie.php?categorie_id=2" class="filter-item" data-filter="Shampoing">Shampoing</a>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <!-- Galerie début -->
+                <?php
+                $categorieId = $_GET['categorie_id'] ?? 'all';
+
+                foreach ($produits as $produit) {
+                    if ($categorieId == 'all' || $produit['categorie_id'] == $categorieId) {
+                        echo '<div class="gallery-item" data-category="' . $produit['categorie_objet'] . '">';
+                        echo '<a href="page1.php?id=' . $produit['id'] . '">';
+                        echo '<img src="' . $produit['image'] . '">';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                }
+                ?>
+                <!-- Galerie fin -->
             </div>
         </div>
-
-
-
-
-        <div class="row">
-            <!-- Galerie début -->
-            <?php
-            $categorieId = $_GET['categorie_id'] ?? 'all';
-
-            foreach ($produits as $produit) {
-                if ($categorieId == 'all' || $produit['categorie_id'] == $categorieId) {
-                    echo '<div class="gallery-item" data-category="' . $produit['categorie_objet'] . '">';
-                    echo '<a href="page1.php?id=' . $produit['id'] . '">';
-                    echo '<img src="' . $produit['image'] . '">';
-                    echo '</a>';
-                    echo '</div>';
-                }
-            }
-            ?>
-            <!-- Galerie fin -->
-        </div>
-    </div>
-</section>
+    </section>
 
     <script src="galerie.js"></script>
 </body>
