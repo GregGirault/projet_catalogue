@@ -3,19 +3,21 @@ session_start();
 require_once("connect.php");
 
 if ($_POST) {
-    if (isset($_POST["id"]) && isset($_POST["objet"]) && isset($_POST["description"]) && isset($_POST["ingredients"]) && isset($_POST["image"]) && isset($_POST["categorie_id"])) {
+    if (isset($_POST["id"]) && isset($_POST["objet"]) && isset($_POST["titre"]) && isset($_POST["description"]) && isset($_POST["ingredients"]) && isset($_POST["image"]) && isset($_POST["categorie_id"])) {
         $id = strip_tags($_POST["id"]);
         $objet = strip_tags($_POST["objet"]);
+        $titre = strip_tags($_POST["titre"]);
         $description = strip_tags($_POST["description"]);
         $ingredients = strip_tags($_POST["ingredients"]);
         $image = strip_tags($_POST["image"]);
         $categorie_id = strip_tags($_POST["categorie_id"]);
 
         // Modifier le produit dans la table des produits
-        $sql = "UPDATE produits SET objet=:objet, description=:description, ingredients=:ingredients, image=:image, categorie_id=:categorie_id WHERE id = :id";
+        $sql = "UPDATE produits SET objet=:objet, titre=:titre, description=:description, ingredients=:ingredients, image=:image, categorie_id=:categorie_id WHERE id = :id";
         $query = $db->prepare($sql);
         $query->bindValue(":id", $id, PDO::PARAM_INT);
         $query->bindValue(":objet", $objet, PDO::PARAM_STR);
+        $query->bindValue(":titre", $titre, PDO::PARAM_STR);
         $query->bindValue(":description", $description, PDO::PARAM_STR);
         $query->bindValue(":ingredients", $ingredients, PDO::PARAM_STR);
         $query->bindValue(":image", $image, PDO::PARAM_STR);
@@ -71,6 +73,10 @@ require_once("close.php");
             <div class="mb-4">
                 <label for="objet" class="block font-bold text-gray-700">Nom</label>
                 <input type="text" name="objet" required value="<?= $produit['objet'] ?>" class="form-input mt-1">
+            </div>
+            <div class="mb-4">
+                <label for="titre" class="block font-bold text-gray-700">Titre</label>
+                <input type="text" name="titre" id="titre" required value="<?= $produit['titre'] ?>" class="form-input mt-1">
             </div>
             <div class="mb-4">
                 <label for="description" class="block font-bold text-gray-700">Description</label>

@@ -1,24 +1,54 @@
 .fond {
-  position: relative;
-  width: 300vw;
-  right: 1900px;
+  position: absolute;
+  width: 270vw;
+  transform: translateX(-50%);
+  left: 50%;
 }
 
 body {
   overflow-x: hidden;
+  position: relative;
 }
 
-.fa-right-to-bracket{
-    font-size: 60px;
-    z-index: 2;
-    position: absolute;
-    top: 50px;
-    color: rgba(255, 255, 255, 0.784);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.474);
-    transition: 0.3s ease-in-out;
+.fa-right-to-bracket {
+  font-size: 60px;
+  z-index: 2;
+  position: fixed;
+  top: 50px;
+  right: 40px;
+  color: rgba(255, 255, 255, 0.784);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.474);
+  transition: 0.3s ease-in-out;
+  animation: bounce 1s infinite;
 }
 
-.fa-right-to-bracket:hover{
-transform: scale(1.1);
+.fa-right-to-bracket:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.474);
+  transition: box-shadow 0.3s ease-in-out;
+  animation: rotate 1s ;
 }
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
     

@@ -14,15 +14,7 @@ if (isset($_GET['id'])) {
         $description = $produits['description'];
         $truncatedDescription = substr($description, 0, 400); // Tronque la description à 400 caractères
         $ingredients = $produits['ingredients'];
-    } else {
-        // Gérer le cas où le produit n'a pas de description ou d'ingrédients
-        $description = "Description non disponible";
-        $ingredients = "Ingrédients non disponibles";
     }
-} else {
-    // Gérer le cas où l'ID du produit n'est pas défini
-    $description = "Description non disponible";
-    $ingredients = "Ingrédients non disponibles";
 }
 ?>
 

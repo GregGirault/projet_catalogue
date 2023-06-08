@@ -18,7 +18,7 @@ body{
     border: 1px solid #f1f1f1;
     background: #ffffff81;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    border-radius: 5%;
+    border-radius: 10px;
    }
    #container h1{
     width: 38%;

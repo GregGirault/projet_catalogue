@@ -29,6 +29,8 @@ h1 {
 .card-container {
   display: flex;
   align-items: center;
+  justify-content: center; /* Ajout de cette ligne */
+  margin: 0 auto;
 }
 
 .card {
@@ -49,6 +51,11 @@ h1 {
   height: 100%;
   object-fit: cover;
   animation: fadeInImage 1s ease-in-out;
+  transition: 0.3s ease-out;
+}
+
+.card-image img:hover {
+  transform: scale(1.1);
 }
 
 .card-description {
@@ -56,6 +63,11 @@ h1 {
   text-align: justify;
   animation: fadeIn 1s ease-in-out;
   width: 100%;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card-description:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .card-description h2 {
@@ -93,6 +105,7 @@ h1 {
   animation: slideRight 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -116,7 +129,7 @@ h1 {
 }
 
 header {
-  background: linear-gradient(to right, #f6e7d7, #fecf7a);
+  background: linear-gradient(to right, #ebebeb, #d2d2d2);
   padding: 20px;
   text-align: center;
   position: fixed;
@@ -124,7 +137,9 @@ header {
   left: 0;
   width: 100%;
   z-index: 2;
+  transition: background 0.3s ease-in-out;
 }
+
 
 header h1 {
   font-size: 24px;
@@ -152,83 +167,15 @@ header nav ul li a {
   padding: 5px 10px;
   border-radius: 3px;
   background-color: #fff;
+  transition: 0.3s ease-in-out;
+  transform: none;
 }
 
 header nav ul li a:hover {
-  background: linear-gradient(to right, #f6e7d7, #ffffff);
-  color: #333;
-}
-
-footer {
-  background: linear-gradient(to right, #fecf7a, #f6e7d7);
-  padding: 10px 20px;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 9.5%;
-  animation: fadeSlideUp 1s ease-in-out;
-}
-
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-footer h2 {
-  font-size: 18px;
-  color: #333;
-  margin-top: 5px;
-}
-
-footer p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: -45px;
-}
-
-footer nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-}
-
-footer nav ul li {
-  margin-right: 10px;
-}
-
-footer nav ul li a {
-  text-decoration: none;
-  color: #333;
-  padding: 5px 10px;
-  border-radius: 3px;
-  background-color: #fff;
-}
-
-footer nav ul li a:hover {
-  background: linear-gradient(to right, #f6e7d7, #ffffff);
-  color: #333;
-}
-
-@keyframes fadeInImage {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  background: linear-gradient(to right, #ebebeb, #d2d2d2);
+  color: #333333cc; /* Remplacez par la couleur de votre choix */
+  transform: scale(1.1);
+  letter-spacing: 2px;
 }
 
 

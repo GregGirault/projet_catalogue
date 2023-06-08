@@ -19,7 +19,6 @@ $query = $db->query($sql);
 $produits = $query->fetchAll();
 
 require_once("close.php");
-
 ?>
 
 <!DOCTYPE html>
@@ -31,18 +30,14 @@ require_once("close.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="galerie.css">
     <title>Galerie</title>
-
-
 </head>
 
 <body>
-
-
-
     <section class="gallery">
         <div class="container">
             <div class="rowi">
                 <div class="gallery-filter">
+                    <h1>Galerie</h1>
                     <a href="galerie.php?categorie_id=all" class="filter-item" data-filter="all">All</a>
                     <a href="galerie.php?categorie_id=1" class="filter-item" data-filter="parfum">Parfum</a>
                     <a href="galerie.php?categorie_id=3" class="filter-item" data-filter="Déodorant">Déodorant</a>
@@ -50,11 +45,7 @@ require_once("close.php");
                 </div>
             </div>
 
-
-
-
             <div class="row">
-                <!-- Galerie début -->
                 <?php
                 $categorieId = $_GET['categorie_id'] ?? 'all';
 
@@ -63,17 +54,18 @@ require_once("close.php");
                         echo '<div class="gallery-item" data-category="' . $produit['categorie_objet'] . '">';
                         echo '<a href="page1.php?id=' . $produit['id'] . '">';
                         echo '<img src="' . $produit['image'] . '">';
+                        echo '<h3>' . $produit['titre'] . '</h3>';
                         echo '</a>';
                         echo '</div>';
                     }
                 }
                 ?>
-                <!-- Galerie fin -->
             </div>
         </div>
     </section>
 
     <script src="galerie.js"></script>
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>

@@ -5,13 +5,15 @@ require_once("connect.php");
 
 if ($_POST) {
     if (
-        isset($_POST["objet"]) && isset($_POST["description"]) &&
+        isset($_POST["objet"]) && isset($_POST["titre"]) && isset($_POST["description"]) &&
         isset($_FILES["image"]) && isset($_POST["categorie_id"])&&
-        isset($_POST["ingredients"])
+        isset($_POST["ingredients"]) && isset($_POST["id_commentaires"])
     ) {
         $objet = strip_tags($_POST["objet"]);
+        $titre = strip_tags($_POST["titre"]);
         $description = strip_tags($_POST["description"]);
         $ingredients = strip_tags($_POST["ingredients"]);
+        $id_commentaires = strip_tags($_POST["id_commentaires"]);
 
         // Gérer le téléchargement de l'image
         $image = $_FILES["image"]["name"]; // Nom du fichier téléchargé
@@ -24,15 +26,20 @@ if ($_POST) {
 
             // ... le reste du code pour la base de données ...
 
-            $sql = "INSERT INTO produits (objet, description, ingredients, image, categorie_id)
-            VALUES (:objet, :description, :ingredients, :image, :categorie_id)";
+            $sql = "INSERT INTO produits (objet, titre, description, ingredients, image, categorie_id, id_commentaires)
+            VALUES (:objet, :titre, :description, :ingredients, :image, :categorie_id, :id_commentaires)";
             $query = $db->prepare($sql);
             $query->bindValue(":objet", $objet, PDO::PARAM_STR);
+            $query->bindValue(":titre", $titre, PDO::PARAM_STR);
             $query->bindValue(":description", $description, PDO::PARAM_STR);
             $query->bindValue(":ingredients", $ingredients, PDO::PARAM_STR);
             $query->bindValue(":image", $image, PDO::PARAM_STR);
             $query->bindValue(":categorie_id", $categorie_id, PDO::PARAM_INT);
+            $query->bindValue(":id_commentaires", $id_commentaires,
+                PDO::PARAM_INT
+            );
             $success = $query->execute();
+    
 
             if ($success) {
                 // ... le reste du code pour la redirection et les messages ...
@@ -75,6 +82,10 @@ require_once("close.php");
             <input type="text" name="objet" required class="form-input mt-1">
         </div>
         <div class="mb-4">
+            <label for="titre" class="block font-bold text-gray-700">Titre</label>
+            <input type="text" name="titre" id="titre" required class="form-input mt-1">
+        </div>
+        <div class="mb-4">
             <label for="description" class="block font-bold text-gray-700">Description</label>
             <textarea name="description" required class="form-textarea mt-1"></textarea>
         </div>
@@ -82,6 +93,11 @@ require_once("close.php");
             <label for="ingredients" class="block font-bold text-gray-700">Ingredients</label>
             <textarea name="ingredients" required class="form-textarea mt-1"></textarea>
         </div>
+        <div class="mb-4">
+    <label for="id_commentaires" class="block font-bold text-gray-700"></label>
+    <input type="hidden" name="id_commentaires" required class="form-input mt-1" value="0">
+</div>
+
 
 
 

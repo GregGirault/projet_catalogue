@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+p {
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: #555;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.contact-info {
+  margin-bottom: 30px;
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+.signature {
+  font-style: italic;
+}

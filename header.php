@@ -42,7 +42,7 @@ if (isset($_GET['id'])) {
         <nav>
             <ul>
                 <li><a href="galerie.php">Accueil</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="./contact.php">Contact</a></li>
             </ul>
         </nav>
     </header>
