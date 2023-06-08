@@ -179,4 +179,75 @@ header nav ul li a:hover {
 }
 
 
+.card-notes{
+  position:absolute;
+  left:60px;
+  top: 300px;
+  display: flex;
 
+}
+
+.notes-contenaire {
+
+  position: absolute;
+  left: 100px;
+  bottom: 180px;
+
+ 
+}
+.card-notes {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.card-notes h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-notes p {
+  margin-bottom: 5px;
+}
+
+.notes-contenaire {
+  margin-top: 20px;
+}
+
+.notes {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stars {
+  font-size: 24px;
+  color: #ffd700;
+  margin-right: 10px;
+}
+
+.star {
+  cursor: pointer;
+}
+
+.avis input[type="text"],
+.avis input[type="submit"] {
+  padding: 5px 10px;
+}
+
+.avis input[type="text"] {
+  margin-right: 10px;
+  width: 200px;
+}
+
+.avis input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.avis input[type="submit"]:hover {
+  background-color: #00b318;
+}
