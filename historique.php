@@ -106,8 +106,8 @@ require_once("close.php");
     ?>
 </head>
 
-<body>
-    <h1 class="titre-principal">Historique des ajouts</h1>
+<body class="flex flex-col items-center justify-center min-h-screen">
+    <h1 class="text-2xl font-bold mt-1">Historique des ajouts</h1>
     <table class="w-full bg-white shadow-md rounded mb-6">
         <thead>
             <tr>
@@ -151,7 +151,7 @@ require_once("close.php");
         </ul>
     </nav>
 
-                <a href="ajout.php">Ajouter</a>
+    <a href="ajout.php">Ajouter</a>
 
 
     <br><br>
