@@ -90,6 +90,10 @@ require_once("close.php");
                 <label for="image" class="block font-bold text-gray-700">Image</label>
                 <input type="text" name="image" required value="<?= $produit['image'] ?>" class="form-input mt-1">
             </div>
+            <div class="mb-4">
+                <label for="image" class="block font-bold text-gray-700">Image</label>
+                <input type="file" name="image" required value="<?= $produit['image'] ?>" class="form-input mt-1">
+            </div>
 
             <div class="mb-4">
     <label for="categorie_id" class="block font-bold text-gray-700">Catégorie</label>
