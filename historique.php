@@ -3,6 +3,11 @@ session_start();
 
 require_once("connect.php");
 
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php");
+    exit();
+}
+
 if ($_POST) {
     if (
         !empty($_POST["objet"]) && !empty($_POST["description"])
@@ -27,8 +32,13 @@ if ($_POST) {
 
         header("Location: historique.php");
         exit();
+       
+    } else {
+        header("Location: login.php");
+        exit();
     }
 }
+
 
 // pagination
 if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -53,6 +63,9 @@ $query->bindValue(':premier', $premier, PDO::PARAM_INT);
 $query->bindValue(':parpage', $parPage, PDO::PARAM_INT);
 $query->execute();
 $articles = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 
 require_once("close.php");
 ?>
@@ -165,6 +178,7 @@ require_once("close.php");
 
     <div class="flex justify-center mt-4">
         <a href="ajout.php" class=" mt-5 ml-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">Ajouter</a>
+        <a href="deconnexion.php" class=" mt-5 ml-6 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 cursor-pointer">deconnexion</a>
     </div>
 
     <br><br>

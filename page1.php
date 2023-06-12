@@ -95,6 +95,11 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
             <?php if (isset($commentairesAffiches)) : ?>
                 <div class="comment-columns">
                     <?php foreach ($commentairesAffiches as $commentaire) : ?>
+
+
+                        <!-- si besoin de recupere ip pour evite les spam d avis -->
+                        <!--  ($commentaire['ip'] == $_SERVER['REMOTE_ADDR']) : -->
+
                         <div class="comment-bubble">
                             <p>
                                 <?php for ($i = 1; $i <= $commentaire['notes']; $i++) : ?>

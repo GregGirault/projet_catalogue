@@ -3,6 +3,11 @@ session_start();
 
 require_once("connect.php");
 
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php");
+    exit();
+}
+
 if ($_POST) {
     if (
         isset($_POST["objet"]) && isset($_POST["titre"]) && isset($_POST["description"]) &&
@@ -42,6 +47,10 @@ if ($_POST) {
             );
             $success = $query->execute();
 
+          
+
+         
+
 
             if ($success) {
                 // ... le reste du code pour la redirection et les messages ...
@@ -51,12 +60,17 @@ if ($_POST) {
         } else {
             $error = "Une erreur est survenue lors du téléchargement de l'image.";
         }
+    } else {
+        header("Location: login.php");
+        exit();
     }
 }
 
 $sql_categories = "SELECT * FROM categorie";
 $query_categories = $db->query($sql_categories);
 $categories = $query_categories->fetchAll();
+
+
 
 require_once("close.php");
 ?>
