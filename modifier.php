@@ -92,7 +92,7 @@ require_once("close.php");
             </div>
             <div class="mb-4">
                 <label for="image" class="block font-bold text-gray-700">Image</label>
-                <input type="text"  disabled="disabled" name="image" value="<?= $produit['image'] ?>" class="form-input px-2 mt-1 border-2 border-gray-300 rounded-md py-1">
+                <img src="image/<?= $produit['image'] ?>" alt="Product Image" class="w-64 h-auto mt-1">
             </div>
             <div class="mb-4">
                 <label for="image" class="block font-bold text-gray-700">Image</label>
