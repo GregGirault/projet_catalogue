@@ -143,7 +143,7 @@ require_once("close.php");
                         <span><?= $produit['description'] ?></span>
                     </td>
                     <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
-                        <span><?= $produit['image'] ?></span>
+                    <img src="image/<?= $produit['image'] ?>" alt="Product Image" class="w-64 h-auto mt-1">
                     </td>
                     <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
                         <span><?= $produit['categorie_id'] ?></span>
@@ -179,6 +179,7 @@ require_once("close.php");
     <div class="flex justify-center mt-4">
         <a href="ajout.php" class=" mt-5 ml-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">Ajouter</a>
         <a href="deconnexion.php" class=" mt-5 ml-6 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 cursor-pointer">deconnexion</a>
+        <a href="galerie.php" class=" mt-5 ml-6 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 cursor-pointer">galerie</a>
     </div>
 
     <br><br>

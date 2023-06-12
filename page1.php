@@ -71,7 +71,7 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
         <div class="card">
             <div class="card-image">
                 <a href="<?php echo $produit['image']; ?>" data-lightbox="gallery">
-                    <img src="<?php echo $produit['image']; ?>" alt="parfum rosalie">
+                    <img src="image/<?php echo $produit['image']; ?>" alt="parfum rosalie">
                 </a>
             </div>
         </div>

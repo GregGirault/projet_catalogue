@@ -53,7 +53,7 @@ require_once("close.php");
                     if ($categorieId == 'all' || $produit['categorie_id'] == $categorieId) {
                         echo '<div class="gallery-item" data-category="' . $produit['categorie_objet'] . '">';
                         echo '<a href="page1.php?id=' . $produit['id'] . '">';
-                        echo '<img src="' . $produit['image'] . '">';
+                        echo '<img src="image/' . $produit['image'] . '">';
                         echo '<h3>' . $produit['titre'] . '</h3>';
                         echo '</a>';
                         echo '</div>';
