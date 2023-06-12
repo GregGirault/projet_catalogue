@@ -45,13 +45,11 @@
 
     <p>Nous nous réservons le droit de mettre à jour cette politique de confidentialité à tout moment. Toute modification sera publiée sur notre site web avec la date d'entrée en vigueur. Nous vous encourageons à consulter régulièrement cette politique pour rester informé des pratiques en matière de confidentialité.</p>
 
-    <h2>7. Contactez-nous</h2>
+    <p>Date d'entrée en vigueur : 21/06/2023</p> <br>
+    <div class="button-container">
+        <a href="#" class="button" onclick="history.back()">Retour</a>
+    </div>
 
-    <p>Si vous avez des questions, des préoccupations ou des demandes concernant cette politique de confidentialité ou nos pratiques de traitement des données, veuillez nous contacter à [adresse e-mail ou adresse postale].</p>
-
-    <p>Date d'entrée en vigueur : 21/06/2023</p>
-
-    <p>Note : Cette politique de confidentialité est fournie à titre d'exemple et doit être adaptée en fonction des besoins spécifiques de votre entreprise et des lois applicables dans votre juridiction. Il est recommandé de consulter un professionnel du droit ou un spécialiste de la confidentialité pour garantir la conformité avec les réglementations en vigueur.</p>
 </body>
 
 </html>

@@ -59,8 +59,6 @@ footer nav ul li a {
 footer nav ul li a:hover {
   background: linear-gradient(to right, #ebebeb, #d2d2d2);
   color: #333333cc;
-  transform: scale(1.1);
-  letter-spacing: 2px;
 }
 
 @keyframes fadeInImage {

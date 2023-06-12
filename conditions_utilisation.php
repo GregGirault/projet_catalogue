@@ -54,12 +54,14 @@
     <p>5.2 Intégralité de l'accord : Les présentes Conditions constituent l'intégralité de l'accord entre vous et [Nom de l'entreprise] concernant votre utilisation de notre site web et de nos services, et remplacent tous les accords antérieurs ou contemporains.</p>
 
     <p>5.3 Modifications des Conditions : Nous nous réservons le droit de modifier les présentes Conditions à tout moment. Les modifications seront effectives dès leur publication sur notre site web. Il est de votre responsabilité de consulter régulièrement les Conditions pour prendre connaissance des modifications.</p>
-
     <footer>
         <p>Date d'entrée en vigueur : 21/06/2023</p>
 
         <p>Note : Ces conditions d'utilisation sont fournies à titre d'exemple et doivent être adaptées en fonction des besoins spécifiques de votre entreprise et des lois applicables dans votre juridiction. Il est recommandé de consulter un professionnel du droit pour garantir la conformité avec les réglementations en vigueur.</p>
     </footer>
+    <div class="button-container">
+        <a href="#" class="button" onclick="history.back()">Retour</a>
+    </div>
 </body>
 
 </html>

@@ -37,16 +37,15 @@ $id = "";
 if (isset($_GET["id"]) && !empty($_GET['id'])) {
     $id = strip_tags($_GET['id']);
 
-// Récupérer les informations du produit et de sa catégorie depuis les tables produits et categorie
-$sql = "SELECT p.*, c.objet AS categorie_objet 
+    // Récupérer les informations du produit et de sa catégorie depuis les tables produits et categorie
+    $sql = "SELECT p.*, c.objet AS categorie_objet 
         FROM produits p
         JOIN categorie c ON p.categorie_id = c.id
         WHERE p.id = :id";
-$query = $db->prepare($sql);
-$query->bindValue(":id", $id, PDO::PARAM_INT);
-$query->execute();
-$produit = $query->fetch();
-
+    $query = $db->prepare($sql);
+    $query->bindValue(":id", $id, PDO::PARAM_INT);
+    $query->execute();
+    $produit = $query->fetch();
 } else {
     header("Location: login.php");
     exit();
@@ -67,44 +66,47 @@ require_once("close.php");
 </head>
 
 <body class="bg-gray-100">
-    <h1 class="text-3xl font-bold text-center mt-8">Modification du produit n° <?= $id ?></h1>
+    <h1 class="font-bold text-center mt-8 text-4xl font-bold text-gray-600 tracking-wide leading-tight">Modification du produit n° <?= $id ?></h1>
     <div class="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-md">
         <form method="post">
             <div class="mb-4">
                 <label for="objet" class="block font-bold text-gray-700">Nom</label>
-                <input type="text" name="objet" required value="<?= $produit['objet'] ?>" class="form-input mt-1">
+                <input type="text" name="objet" required value="<?= $produit['objet'] ?>" class="form-input px-2 mt-1 border-2 border-gray-300 rounded-md py-1">
+
+
+
             </div>
             <div class="mb-4">
                 <label for="titre" class="block font-bold text-gray-700">Titre</label>
-                <input type="text" name="titre" id="titre" required value="<?= $produit['titre'] ?>" class="form-input mt-1">
+                <input type="text" name="titre" id="titre" required value="<?= $produit['titre'] ?>" class="form-input px-2 mt-1 border-2 border-gray-300 rounded-md py-1">
             </div>
             <div class="mb-4">
                 <label for="description" class="block font-bold text-gray-700">Description</label>
-                <textarea name="description" required class="form-textarea mt-1"><?= $produit['description'] ?></textarea>
+                <textarea name="description" required class="form-textarea mt-1 w-full resize-none max-h-[200px] px-2 mt-1 border-2 border-gray-300 rounded-md py-1"><?= $produit['description'] ?></textarea>
+
+
             </div>
             <div class="mb-4">
                 <label for="ingredients" class="block font-bold text-gray-700">ingredients</label>
-                <textarea name="ingredients" required class="form-textarea mt-1"><?= $produit['ingredients'] ?></textarea>
+                <textarea name="ingredients" required class="form-textarea mt-1 w-full resize-none max-h-[200px] px-2 mt-1 border-2 border-gray-300 rounded-md py-1"><?= $produit['ingredients'] ?></textarea>
             </div>
             <div class="mb-4">
                 <label for="image" class="block font-bold text-gray-700">Image</label>
-                <input type="text" name="image"  value="<?= $produit['image'] ?>" class="form-input mt-1">
+                <input type="text"  disabled="disabled" name="image" value="<?= $produit['image'] ?>" class="form-input px-2 mt-1 border-2 border-gray-300 rounded-md py-1">
             </div>
             <div class="mb-4">
                 <label for="image" class="block font-bold text-gray-700">Image</label>
-                <input type="file" name="image"  value="<?= $produit['image'] ?>" class="form-input mt-1">
+                <input type="file" name="image" value="<?= $produit['image'] ?>" class="form-input mt-1">
             </div>
 
             <div class="mb-4">
-    <label for="categorie_id" class="block font-bold text-gray-700">Catégorie</label>
-    <select name="categorie_id" class="form-select mt-1">
-        <option value="<?= $produit['categorie_id'] ?>" selected><?= $produit['categorie_objet'] ?></option>
-    </select>
-</div>
+                <label for="categorie_id" class="block font-bold text-gray-700">Catégorie</label>
+                <select name="categorie_id" class="form-select mt-1 px-2 mt-1 border-2 border-gray-300 rounded-md py-1">
+                    <option value="<?= $produit['categorie_id'] ?>" selected><?= $produit['categorie_objet'] ?></option>
+                </select>
+            </div>
 
 
             <input type="hidden" value="<?= $produit["id"] ?>" name="id">
             <div class="flex justify-center">
                 <input type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer" value="Enregistrer">
-
-               

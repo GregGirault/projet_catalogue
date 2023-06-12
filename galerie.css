@@ -187,9 +187,9 @@ img {
   transition: all 0.3s ease;
 }
 
-/* .gallery .gallery-filter .filter-item {
+.gallery .gallery-filter .filter-item {
   color: #000000;
-} */
+}
 
 a {
   text-decoration: none;

@@ -6,7 +6,7 @@ require_once("connect.php");
 if ($_POST) {
     if (
         isset($_POST["objet"]) && isset($_POST["titre"]) && isset($_POST["description"]) &&
-        isset($_FILES["image"]) && isset($_POST["categorie_id"])&&
+        isset($_FILES["image"]) && isset($_POST["categorie_id"]) &&
         isset($_POST["ingredients"]) && isset($_POST["id_commentaires"])
     ) {
         $objet = strip_tags($_POST["objet"]);
@@ -35,11 +35,13 @@ if ($_POST) {
             $query->bindValue(":ingredients", $ingredients, PDO::PARAM_STR);
             $query->bindValue(":image", $image, PDO::PARAM_STR);
             $query->bindValue(":categorie_id", $categorie_id, PDO::PARAM_INT);
-            $query->bindValue(":id_commentaires", $id_commentaires,
+            $query->bindValue(
+                ":id_commentaires",
+                $id_commentaires,
                 PDO::PARAM_INT
             );
             $success = $query->execute();
-    
+
 
             if ($success) {
                 // ... le reste du code pour la redirection et les messages ...
@@ -71,67 +73,66 @@ require_once("close.php");
     <title>Ajout de produit</title>
 </head>
 
-<body>
-    <h1 class="text-3xl font-bold text-center mt-8">Ajout de produit</h1>
+<body class="bg-gray-100">
+    <h1 class="font-bold text-center mt-8 text-4xl font-bold text-gray-600 tracking-wide leading-tight">Ajout de produit</h1>
     <?php if (isset($error)) : ?>
         <div class="text-red-500 text-center"><?= $error ?></div>
     <?php endif; ?>
     <form method="post" class="max-w-md mx-auto mt-8 bg-white p-6 rounded-lg shadow-md" enctype="multipart/form-data">
         <div class="mb-4">
             <label for="objet" class="block font-bold text-gray-700">Objet</label>
-            <input type="text" name="objet" required class="form-input mt-1">
+            <input type="text" name="objet" required class="form-input px-2 mt-1 border-2 border-gray-300 rounded-md py-1">
         </div>
         <div class="mb-4">
             <label for="titre" class="block font-bold text-gray-700">Titre</label>
-            <input type="text" name="titre" id="titre" required class="form-input mt-1">
+            <input type="text" name="titre" id="titre" required class="form-input px-2 mt-1 border-2 border-gray-300 rounded-md py-1">
         </div>
         <div class="mb-4">
             <label for="description" class="block font-bold text-gray-700">Description</label>
-            <textarea name="description" required class="form-textarea mt-1"></textarea>
+            <textarea name="description" required class="form-textarea mt-1 w-full resize-none max-h-[200px] px-2 mt-1 border-2 border-gray-300 rounded-md py-1"></textarea>
         </div>
         <div class="mb-4">
             <label for="ingredients" class="block font-bold text-gray-700">Ingredients</label>
-            <textarea name="ingredients" required class="form-textarea mt-1"></textarea>
+            <textarea name="ingredients" required class="form-textarea mt-1 w-full resize-none max-h-[200px] px-2 mt-1 border-2 border-gray-300 rounded-md py-1"></textarea>
         </div>
         <div class="mb-4">
-    <label for="id_commentaires" class="block font-bold text-gray-700"></label>
-    <input type="hidden" name="id_commentaires" required class="form-input mt-1" value="0">
-</div>
+            <label for="id_commentaires" class="block font-bold text-gray-700"></label>
+            <input type="hidden" name="id_commentaires" required class="form-select mt-1 px-2 mt-1 border-2 border-gray-300 rounded-md py-1" value="0">
+        </div>
 
 
 
 
 
         <?php
-if (isset($_POST['envoyer'])) {
-    $dossierTempo = $_FILES['image']['tmp_name'];
-    $dossierSite = './image/' . $_FILES['image']['name'];
+        if (isset($_POST['envoyer'])) {
+            $dossierTempo = $_FILES['image']['tmp_name'];
+            $dossierSite = './image/' . $_FILES['image']['name'];
 
-    $tailleMax = 3 * 1024 * 1024; 
+            $tailleMax = 3 * 1024 * 1024;
 
 
-    if ($_FILES['image']['size'] > $tailleMax) {
-        echo 'La taille du fichier dépasse la limite autorisée.';
-        // Arrêtez l'exécution du script ou effectuez une autre action appropriée.
-    }
+            if ($_FILES['image']['size'] > $tailleMax) {
+                echo 'La taille du fichier dépasse la limite autorisée.';
+                // Arrêtez l'exécution du script ou effectuez une autre action appropriée.
+            }
 
-    $mime = mime_content_type($_FILES['image']['tmp_name']);
-    $allowedTypes = ['image/jpeg', 'image/png'];
-    if (!in_array($mime, $allowedTypes)) {
-        echo 'Type de fichier non autorisé.';
-        
-    }
+            $mime = mime_content_type($_FILES['image']['tmp_name']);
+            $allowedTypes = ['image/jpeg', 'image/png'];
+            if (!in_array($mime, $allowedTypes)) {
+                echo 'Type de fichier non autorisé.';
+            }
 
-    $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
-    if ($deplacer) {
-        chmod($dossierSite, 0777); 
+            $deplacer = move_uploaded_file($dossierTempo, $dossierSite);
+            if ($deplacer) {
+                chmod($dossierSite, 0777);
 
-        echo 'Image envoyée avec succès';
-    } else {
-        echo 'Une erreur est survenue lors du téléchargement du fichier.';
-    }
-}
-?>
+                echo 'Image envoyée avec succès';
+            } else {
+                echo 'Une erreur est survenue lors du téléchargement du fichier.';
+            }
+        }
+        ?>
 
 
 
@@ -142,7 +143,7 @@ if (isset($_POST['envoyer'])) {
         </div>
         <div class="mb-4">
             <label for="categorie_id" class="block font-bold text-gray-700">Catégorie</label>
-            <select name="categorie_id" class="form-select mt-1">
+            <select name="categorie_id" class="form-select mt-1 px-2 mt-1 border-2 border-gray-300 rounded-md py-1">
 
                 <?php foreach ($categories as $cat) : ?>
                     <option value="<?= $cat['id'] ?>"><?= $cat['objet'] ?></option>
@@ -152,11 +153,13 @@ if (isset($_POST['envoyer'])) {
         <div class="flex justify-center">
             <input type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer" value="Ajouter">
         </div>
-        <div class="flex justify-center mt-4">
-            <a href="historique.php"class="text-blue-500">Historique</a>
-            <a href="modifier.php?id=<?= $produit_id ?>" class="text-blue-500">Modifier</a>
-            <a href="supprimer.php?id=<?= $produit_id ?>" class="text-red-500">Supprimer</a>
-            <a href="ajout.php"><span class="text-gray-500">Retour</span></a>
+        <div class="flex justify-center mt-10">
+            <!-- <a href="historique.php" class="text-black-500 mr-8 hover:underline bg-gray-200 rounded px-2 py-1 hover:bg-gray-600 hover:text-white">Historique</a>
+            <a href="modifier.php?id=<?= $produit_id ?>" class="text-blue-500 mr-8 hover:underline bg-blue-200 rounded px-2 py-1 hover:bg-blue-400 hover:text-white">Modifier</a>
+            <a href="supprimer.php?id=<?= $produit_id ?>" class="text-red-500 mr-8 hover:underline bg-red-200 rounded px-2 py-1 hover:bg-red-400 hover:text-white">Supprimer</a> -->
+            <a href="#" class="text-black-500 hover:underline bg-gray-200 rounded px-2 py-1 hover:bg-gray-400 hover:text-white" onclick="history.back()">Retour</a>
+
+
         </div>
     </form>
 </body>

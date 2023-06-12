@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="contact.css">
     <title>Contact</title>
-    
+
 </head>
 
 <body>
@@ -44,6 +44,9 @@
             Cordialement,
             L'équipe Détour
         </p>
+    </div>
+    <div class="button-container">
+        <a href="#" class="button" onclick="history.back()">Retour</a>
     </div>
 </body>
 

@@ -17,6 +17,9 @@
       <i class="fa-solid fa-right-to-bracket"></i>
     </a>
     <img class="fond" src="Devouvez nos destination de reve ! (1).svg">
+    <a href="galerie.php" class="gallery-link">
+      <button class="gallery-button">Accéder à la galerie</button>
+    </a>
   </div>
 
 </body>

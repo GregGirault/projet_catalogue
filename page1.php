@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'header.php';
 require_once 'connect.php';
 
@@ -40,21 +40,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
 }
 
 // Récupérer tous les commentaires et les regrouper par produit
-$sql_commentaires = "SELECT * FROM commentaires";
-$query_commentaires = $db->query($sql_commentaires);
+$sql_commentaires = "SELECT * FROM commentaires WHERE id_produit = :id_produit";
+$query_commentaires = $db->prepare($sql_commentaires);
+$query_commentaires->bindParam(':id_produit', $id);
+$query_commentaires->execute();
 $commentaires_list = $query_commentaires->fetchAll(PDO::FETCH_ASSOC);
 
-$commentaires_par_produit = array();
+// Pagination des commentaires
+$commentairesParPage = 3;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $commentairesParPage;
 
-foreach ($commentaires_list as $commentaire) {
-    $produit_id = $commentaire['id_produit'];
-
-    if (!isset($commentaires_par_produit[$produit_id])) {
-        $commentaires_par_produit[$produit_id] = array();
-    }
-
-    $commentaires_par_produit[$produit_id][] = $commentaire;
-}
+$commentairesAffiches = array_slice($commentaires_list, $offset, $commentairesParPage);
+$nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
 ?>
 
 <!DOCTYPE html>
@@ -66,22 +64,6 @@ foreach ($commentaires_list as $commentaire) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style_page1.css">
     <title><?= $produit['objet'] ?></title>
-    <style>
-        .stars {
-            display: inline-block;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .stars .star {
-            color: #ddd;
-        }
-
-        .stars .star:hover,
-        .stars .star.active {
-            color: #ffcc00;
-        }
-    </style>
 </head>
 
 <body>
@@ -107,20 +89,48 @@ foreach ($commentaires_list as $commentaire) {
         </div>
     </div>
 
+    <h2 class="aviis">AVIS</h2>
     <div class="card-notes">
-        <h2>AVIS</h2>
         <?php if (isset($produit['id'])) : ?>
-            <?php $produit_id = $produit['id']; ?>
-            <?php if (isset($commentaires_par_produit[$produit_id])) : ?>
-                <?php foreach ($commentaires_par_produit[$produit_id] as $commentaire) : ?>
-                    <p><?= $commentaire['avis'] ?></p>
-                    <p>Note: <?= $commentaire['notes'] ?></p>
-                <?php endforeach; ?>
+            <?php if (isset($commentairesAffiches)) : ?>
+                <div class="comment-columns">
+                    <?php foreach ($commentairesAffiches as $commentaire) : ?>
+                        <div class="comment-bubble">
+                            <p>
+                                <?php for ($i = 1; $i <= $commentaire['notes']; $i++) : ?>
+                                    &#x2B50;
+                                <?php endfor; ?>
+                            </p>
+                            <p><?= $commentaire['avis'] ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             <?php else : ?>
                 <p>Aucun commentaire disponible pour ce produit.</p>
             <?php endif; ?>
         <?php else : ?>
             <p>Veuillez sélectionner un produit pour afficher les commentaires.</p>
+        <?php endif; ?>
+
+        <!-- Pagination -->
+        <?php if ($nombreDePages > 1) : ?>
+            <div class="pagination">
+                <?php if ($page > 1) : ?>
+                    <a href="?id=<?= $id ?>&page=<?= $page - 1 ?>">Précédent</a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $nombreDePages; $i++) : ?>
+                    <?php if ($i == $page) : ?>
+                        <span class="current-page"><?= $i ?></span>
+                    <?php else : ?>
+                        <a href="?id=<?= $id ?>&page=<?= $i ?>"><?= $i ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($page < $nombreDePages) : ?>
+                    <a href="?id=<?= $id ?>&page=<?= $page + 1 ?>">Suivant</a>
+                <?php endif; ?>
+            </div>
         <?php endif; ?>
     </div>
 
@@ -137,7 +147,7 @@ foreach ($commentaires_list as $commentaire) {
                 <input type="hidden" id="rating" name="notes">
         </div>
         <div class="avis">
-            <input type="text" name="avis" placeholder="Avis">
+            <input type="text" name="avis" placeholder="Donnez nous votre Avis &#128512 ! ">
             <input type="submit" name="submit" value="Envoyer">
         </div>
         </form>
@@ -157,7 +167,31 @@ foreach ($commentaires_list as $commentaire) {
         });
     </script>
 
-    <?php include 'footer.php'; ?>
-</body>
+    
+    <!-- Toast -->
+    <div class="toast" id="newsletter-toast">
+        <span>Inscrivez-vous à notre newsletter pour recevoir les dernières nouvelles et offres spéciales par e-mail. <a href="inscription-newsletter.html">S'inscrire</a></span>
+        <button onclick="hideToast()">Fermer</button>
+    </div>
 
+    <!-- Script pour afficher/masquer le toast -->
+    <script>
+    function showToast() {
+        var toast = document.getElementById('newsletter-toast');
+        toast.classList.add('show');
+    }
+
+    function hideToast() {
+        var toast = document.getElementById('newsletter-toast');
+        toast.classList.remove('show');
+    }
+
+    // Afficher le toast après un certain délai (par exemple, 5 secondes)
+    setTimeout(showToast, 5000);
+
+    
+</script>
+
+</body>
+<?php include 'footer.php'; ?>
 </html>

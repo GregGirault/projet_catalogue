@@ -30,6 +30,7 @@ if ($_POST) {
     }
 }
 
+// pagination
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $currentPage = (int) strip_tags($_GET['page']);
 } else {
@@ -53,9 +54,6 @@ $query->bindValue(':parpage', $parPage, PDO::PARAM_INT);
 $query->execute();
 $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
 require_once("close.php");
 ?>
 
@@ -69,11 +67,12 @@ require_once("close.php");
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <title>Historique des changements d'ampoules</title>
+    <title>Historique des changements</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <?php if (isset($_SESSION["toast_message"]) && isset($_SESSION["toast_type"])) : ?>
         <script>
+            // Affiche un toast avec un message
             document.addEventListener('DOMContentLoaded', function() {
                 Toastify({
                     text: "<?php echo $_SESSION["toast_message"]; ?>",
@@ -106,73 +105,89 @@ require_once("close.php");
     ?>
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen">
-    <h1 class="text-2xl font-bold mt-1">Historique des ajouts</h1>
-    <table class="w-full bg-white shadow-md rounded mb-6">
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <h1 class="text-4xl font-bold mt-8 text-gray-600 tracking-wide leading-tight border-b-4 border-gray-700 pb-2">Historique des ajouts</h1>
+
+    <table class="bg-white shadow-md rounded-lg overflow-hidden my-10 mx-2">
         <thead>
             <tr>
-                <th class="px-4 py-2 text-left">Objet</th>
-                <th class="px-4 py-2 text-left">Description</th>
-                <th class="px-4 py-2 text-left">Image</th>
-                <th class="px-4 py-2 text-left">Catégorie ID</th>
-                <th class="px-4 py-2 text-left">Modifier / Supprimer</th>
+                <th class="px-4 py-2 text-left border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Objet</th>
+                <th class="px-4 py-2 text-left border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Description</th>
+                <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Image</th>
+                <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Catégorie ID</th>
+                <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Modifier / Supprimer</th>
             </tr>
+
+
         </thead>
         <tbody>
             <?php foreach ($articles as $produit) { ?>
                 <tr>
-                    <td class="px-4 py-2"><?= $produit['objet'] ?></td>
-                    <td class="px-4 py-2"><?= $produit['description'] ?></td>
-                    <td class="px-4 py-2"><?= $produit['image'] ?></td>
-                    <td class="px-4 py-2"><?= $produit['categorie_id'] ?></td>
-                    <td class="px-4 py-2">
-                        <a class="modify-link btn-modif text-blue-500 hover:text-blue-700" href="modifier.php?id=<?= $produit['id'] ?>" onclick="modif(event)">Modifier</a>
-                        <a class="delete-link btn-suppr text-red-500 hover:text-red-700" href="supprimer.php?id=<?= $produit['id'] ?>" onclick="supprimer(event)">Supprimer</a>
+                    <td class="px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                        <span><?= $produit['objet'] ?></span>
+                    </td>
+                    <td class="px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                        <span><?= $produit['description'] ?></span>
+                    </td>
+                    <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                        <span><?= $produit['image'] ?></span>
+                    </td>
+                    <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                        <span><?= $produit['categorie_id'] ?></span>
+                    </td>
+                    <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                        <a class="modify-link btn-modif text-blue-500 hover:underline transition duration-200 hover:bg-blue-400 hover:text-white rounded px-2 py-1 " href="modifier.php?id=<?= $produit['id'] ?>" onclick="modif(event)">Modifier</a>
+                        <a class="delete-link btn-suppr text-red-500 hover:underline transition duration-200 hover:bg-red-400 hover:text-white rounded px-2 py-1" href="supprimer.php?id=<?= $produit['id'] ?>" onclick="supprimer(event)">Supprimer</a>
                     </td>
                 </tr>
             <?php } ?>
         </tbody>
     </table>
+
+
     <nav class="flex justify-center mt-4">
         <ul class="pagination flex items-center space-x-4">
             <li class="pagination-item <?php if ($currentPage == 1) echo 'disabled'; ?>">
-                <a href="./historique.php?page=<?php echo $currentPage - 1; ?>" class="pagination-link">&laquo; Précédente</a>
+                <a href="./historique.php?page=<?php echo $currentPage - 1; ?>" class="pagination-link px-3 py-1.5 bg-gradient-to-r from-gray-300 to-gray-400 rounded text-gray-700 hover:text-white transition duration-200">&laquo; Précédente</a>
             </li>
 
             <?php for ($page = 1; $page <= $pages; $page++) { ?>
                 <li class="pagination-item">
-                    <a href="./historique.php?page=<?php echo $page; ?>" class="pagination-link <?php if ($currentPage == $page) echo 'active'; ?>"><?php echo $page; ?></a>
+                    <a href="./historique.php?page=<?php echo $page; ?>" class="pagination-link <?php if ($currentPage == $page) echo 'active'; ?> text-blue-500 hover:text-blue-700 hover:underline transition duration-200"><?php echo $page; ?></a>
                 </li>
             <?php } ?>
 
             <li class="pagination-item <?php if ($currentPage == $pages) echo 'disabled'; ?>">
-                <a href="./historique.php?page=<?php echo $currentPage + 1; ?>" class="pagination-link">Suivante &raquo;</a>
+                <a href="./historique.php?page=<?php echo $currentPage + 1; ?>" class="pagination-link px-3 py-1.5 bg-gradient-to-r from-gray-300 to-gray-400 rounded text-gray-700 hover:text-white transition duration-200">Suivante &raquo;</a>
             </li>
         </ul>
     </nav>
 
-    <a href="ajout.php">Ajouter</a>
-
+    <div class="flex justify-center mt-4">
+        <a href="ajout.php" class=" mt-5 ml-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">Ajouter</a>
+    </div>
 
     <br><br>
 
     <br>
 
     <script>
+        // Fonction pour afficher une boîte de confirmation avant la modification
         function modif(event) {
             event.preventDefault();
 
             const confirmationBox = document.createElement('div');
-            confirmationBox.className = 'confirmation';
+            confirmationBox.className = 'confirmation pl-5 mt-3 bg-gradient-to-r from-gray-300 to-gray-400 rounded-lg text-gray-700 text-center flex items-center justify-center border-white opacity-95 transition duration-200';
 
             const message = document.createElement('p');
             message.textContent = 'Êtes-vous sûr de vouloir modifier cet élément ?';
 
             const confirmButton = document.createElement('button');
             confirmButton.textContent = 'Oui, modifier';
+            confirmButton.className = 'ml-3 btn-confirm text-white font-semibold bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded mr-2 transition duration-200';
             const cancelButton = document.createElement('button');
             cancelButton.textContent = 'Annuler';
-            cancelButton.className = 'cancel';
+            cancelButton.className = 'btn-cancel text-white-500 hover:text-gray-700 hover:underline  ml-2 hover:bg-gray-200 hover:text-gray-800 px-4 py-2 rounded mr-2 transition duration-200';
 
             confirmButton.addEventListener('click', function() {
                 window.location.href = event.target.href;
@@ -189,20 +204,22 @@ require_once("close.php");
             document.body.prepend(confirmationBox);
         }
 
+        // Fonction pour afficher une boîte de confirmation avant la suppression
         function supprimer(event) {
             event.preventDefault();
 
             const confirmationBox = document.createElement('div');
-            confirmationBox.className = 'confirmation';
+            confirmationBox.className = 'pl-5 confirmation mt-3 bg-gradient-to-r from-gray-300 to-gray-400 rounded-lg text-gray-700 text-center flex items-center justify-center border-white opacity-95 transition duration-200';
 
             const message = document.createElement('p');
             message.textContent = 'Êtes-vous sûr de vouloir supprimer cet élément ?';
 
             const confirmButton = document.createElement('button');
             confirmButton.textContent = 'Oui, supprimer';
+            confirmButton.className = 'ml-3 btn-confirm text-white font-semibold bg-red-500 hover:bg-red-700 px-4 py-2 rounded mr-2 transition duration-200';
             const cancelButton = document.createElement('button');
             cancelButton.textContent = 'Annuler';
-            cancelButton.className = 'cancel';
+            cancelButton.className = 'btn-cancel text-white-500 hover:text-gray-700 hover:underline ml-2 hover:bg-gray-200 hover:text-gray-800 px-4 py-2 rounded mr-2 transition duration-200';
 
             confirmButton.addEventListener('click', function() {
                 window.location.href = event.target.href;
