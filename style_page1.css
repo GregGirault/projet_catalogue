@@ -297,7 +297,7 @@ header nav ul li a:hover {
 }
 .comment-columns{
   flex-wrap: wrap;
-  position:absolute;
+  
   bottom:130px;
   display:flex;
   flex-direction: column;
