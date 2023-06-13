@@ -29,7 +29,7 @@ h1 {
 .card-container {
   display: flex;
   align-items: center;
-  justify-content: center; /* Ajout de cette ligne */
+  justify-content: center; 
   margin: 0 auto;
 }
 
