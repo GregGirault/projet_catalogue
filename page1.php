@@ -175,7 +175,7 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
     
     <!-- Toast -->
     <div class="toast" id="newsletter-toast">
-        <span>Inscrivez-vous à notre newsletter pour recevoir les dernières nouvelles et offres spéciales par e-mail. <a href="inscription-newsletter.html">S'inscrire</a></span>
+        <span>Inscrivez-vous à notre newsletter pour recevoir les dernières nouvelles et offres spéciales par e-mail. <a href="inscription-newsletter.php">S'inscrire</a></span>
         <button onclick="hideToast()">Fermer</button>
     </div>
 
