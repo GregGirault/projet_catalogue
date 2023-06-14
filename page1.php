@@ -55,6 +55,7 @@ $commentairesAffiches = array_slice($commentaires_list, $offset, $commentairesPa
 $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -136,6 +137,8 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
                     <a href="?id=<?= $id ?>&page=<?= $page + 1 ?>">Suivant</a>
                 <?php endif; ?>
             </div>
+
+
         <?php endif; ?>
     </div>
 
@@ -158,6 +161,7 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
         </form>
     </div>
 
+
     <script>
         const stars = document.querySelectorAll('.star');
         const ratingInput = document.getElementById('rating');
@@ -173,29 +177,35 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
     </script>
 
     
-    <!-- Toast -->
-    <div class="toast" id="newsletter-toast">
-        <span>Inscrivez-vous à notre newsletter pour recevoir les dernières nouvelles et offres spéciales par e-mail. <a href="inscription-newsletter.html">S'inscrire</a></span>
+    
+ <!-- Toast -->
+ <div class="toast" id="newsletter-toast">
+        <span>Inscrivez-vous pour profiter de -20% lors de notre event ainsi que pleins d'autres surprises ! <a href="inscription-newsletter.php">S'inscrire</a></span>
         <button onclick="hideToast()">Fermer</button>
     </div>
 
     <!-- Script pour afficher/masquer le toast -->
     <script>
-    function showToast() {
-        var toast = document.getElementById('newsletter-toast');
-        toast.classList.add('show');
-    }
+        function showToast() {
+            var toast = document.getElementById('newsletter-toast');
+            toast.classList.add('show');
+        }
 
-    function hideToast() {
-        var toast = document.getElementById('newsletter-toast');
-        toast.classList.remove('show');
-    }
+        function hideToast() {
+            var toast = document.getElementById('newsletter-toast');
+            toast.classList.remove('show');
+        }
 
-    // Afficher le toast après un certain délai (par exemple, 5 secondes)
-    setTimeout(showToast, 5000);
+        // Afficher le toast après un certain délai (par exemple, 5 secondes)
+        setTimeout(showToast, 5000);
 
-    
-</script>
+        window.addEventListener('click', function(event) {
+            var toast = document.getElementById('newsletter-toast');
+            if (event.target !== toast && !toast.contains(event.target)) {
+                hideToast();
+            }
+        });
+    </script>
 
 </body>
 <?php include 'footer.php'; ?>

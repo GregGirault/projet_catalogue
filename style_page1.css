@@ -29,7 +29,7 @@ h1 {
 .card-container {
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center; /* Ajout de cette ligne */
   margin: 0 auto;
 }
 
@@ -340,37 +340,49 @@ bottom: 50px;
 }
 
 .toast {
-            position: fixed;
-            bottom: 10px;
-            left: 80%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            z-index: 9999;
-        }
+  position: fixed;
+  bottom: 100px;
+  left: 80%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 9999;
+  display: none;
+  animation: fade-in 0.5s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-        .toast.show {
-            display: block;
-            animation: fade-in 0.5s ease-in-out;
-        }
+.toast.show {
+  display: block;
+}
 
-        .toast a {
-            color: white;
-            text-decoration: underline;
-        }
-        
-        .toast button {
-            margin-left: 10px;
-        }
+.toast a {
+  color: white;
+  text-decoration: underline;
+}
 
-        @keyframes fade-in {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
+.toast button {
+  margin-left: 10px;
+}
 
+@keyframes fade-in {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+@media screen and(max-width: 414px){
+  body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
