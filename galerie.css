@@ -28,7 +28,7 @@ h1::after {
 
 h1::before {
   top: 0;
-  left: 550px;
+  left: 26%;
   width: 0;
   height: 2px;
   animation-delay: 0s;
@@ -36,7 +36,7 @@ h1::before {
 
 h1::after {
   bottom: 0;
-  right: 550px;
+  right: 30%;
   width: 0;
   height: 2px;
   animation-delay: 0.8s;

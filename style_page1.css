@@ -47,16 +47,16 @@ h1 {
 }
 
 .card-image img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  bottom: 45px;
+  right: 23%;
+  width: 70%;
+  height: 70%;
   object-fit: cover;
   animation: fadeInImage 1s ease-in-out;
   transition: 0.3s ease-out;
 }
 
-.card-image img:hover {
-  transform: scale(1.1);
-}
 
 .card-description {
   padding: 10px;
@@ -228,15 +228,17 @@ header nav ul li a:hover {
 }
 
 .avis input[type="text"] {
-  margin-right: 10px;
+  margin-left:-50px;
   width: 200px;
 }
 
 .avis input[type="submit"] {
+  margin-left: 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
+  
 }
 
 .avis input[type="submit"]:hover {
@@ -249,13 +251,14 @@ header nav ul li a:hover {
 }
 .avis {
   position: relative;
-  bottom: -50px;
+  bottom: -70px;
 }
 .aviis {
   position: absolute;
-  right: 1700px;
+  right: 90%;
   top: 200px;
 }
+
 
 .stars {
   display: inline-block;
@@ -273,6 +276,8 @@ header nav ul li a:hover {
 }
 
 .comment-bubble {
+  position: relative;
+  top: -90px;
   background-color: #f2f2f2;
   padding: 20px;
   margin-bottom: 10px;
@@ -323,8 +328,8 @@ header nav ul li a:hover {
 
 .toast {
   position: fixed;
-  bottom: 100px;
-  left: 80%;
+  bottom: 80px;
+  left: 76%;
   transform: translateX(-50%);
   background-color: #333;
   color: white;
@@ -364,10 +369,10 @@ header nav ul li a:hover {
   visibility: hidden;
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 460px) {
   body {
     padding-top: 20px;
-    /* overflow: scroll; */
+    
     height: 130vh;
   }
 
