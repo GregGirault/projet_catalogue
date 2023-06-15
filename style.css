@@ -59,8 +59,8 @@ body {
 
 .gallery-button {
   position: absolute;
-  top: calc(50% + 1050px);
-  left: calc(50% - 500px);
+  top: calc(50% + 900px);
+  left: calc(50% - 430px);
   padding: 10px 20px;
   font-size: 16px;
   background-color: #FFBD59;
@@ -81,15 +81,16 @@ body {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.12);
   letter-spacing: 1.5px;
 }
-@media screen and (max-width: 414px) {
-  .gallery-button {
+@media screen and (max-width: 460px) {
+  .gallery-link button {
     position: absolute;
-    top: calc(50% + 120px);
+    top: calc(50% + 230px);
     left: calc(50% - 145px);
     font-size: 10px;
     padding: 5px 10px;
 
   }
+
 
   .gallery-button:hover{
     transform: scale(0.8);

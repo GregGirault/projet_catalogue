@@ -85,6 +85,7 @@ h1 {
 }
 
 .slide-content {
+  margin-right: 10px;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 3px black;
@@ -417,6 +418,10 @@ header nav ul li a:hover {
     margin-top: 10px;
   }
 
+  header h1{
+    font-size: 22px;
+  }
+
   .notes-contenaire {
     margin-top: 100px;
   }
@@ -455,7 +460,6 @@ header nav ul li a:hover {
   display: flex;
   flex-direction: row;
 }
-
 
   .slide-content {
     margin-bottom: 180px;
@@ -514,10 +518,11 @@ header nav ul li a:hover {
   }
 
   .pagination {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   #newsletter-toast {
     display: none;
   }
+
 }
