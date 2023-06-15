@@ -53,8 +53,9 @@ h1 {
   width: 70%;
   height: 70%;
   object-fit: cover;
-  animation: fadeInImage 1s ease-in-out;
-  transition: 0.3s ease-out;
+  animation: fadeInImage 1.6s cubic-bezier(.6,-0.28,.74,.05);
+
+
 }
 
 
@@ -109,7 +110,7 @@ h1 {
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
   100% {
     opacity: 1;
