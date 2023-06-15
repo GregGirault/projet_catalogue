@@ -281,7 +281,6 @@ h3:hover::after {
   }
 
   .row {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 30px;
     margin-top: 10px; 
     margin-right: 10px;
@@ -298,6 +297,7 @@ h3:hover::after {
     max-width: 100%;
     max-height: 100%;
   }
+
   
 }
 
