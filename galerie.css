@@ -303,7 +303,7 @@ h3:hover::after {
 
 
 
-@media screen and (min-width: 415px) and (max-width: 991px) {
+@media screen and (min-width: 550px) and (max-width: 991px) {
   /* Styles pour tablette */
 
   body{
