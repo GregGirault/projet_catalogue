@@ -1,4 +1,3 @@
-
 <?php require_once 'connect.php'; ?>
 
 <?php
@@ -16,12 +15,10 @@ if (isset($_GET['id'])) {
     } else {
         // Gérer le cas où le produit n'a pas de description ou d'ingrédients
         $description = "Description non disponible";
-       
     }
 } else {
     // Gérer le cas où l'ID du produit n'est pas défini
     $description = "Description non disponible";
-
 }
 ?>
 
@@ -33,6 +30,7 @@ if (isset($_GET['id'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style_page1.css">
+    <link rel="shortcut icon" href="./image/favicon.png" type="image/x-icon">
     <title>Détour</title>
 </head>
 
