@@ -323,10 +323,10 @@ header nav ul li a:hover {
   text-decoration: none;
 }
 
-.pagination a.current-page {
+/* .pagination a.current-page {
   background-color: #333;
   color: #fff;
-}
+} */
 
 .toast {
   position: fixed;
@@ -515,7 +515,7 @@ header nav ul li a:hover {
  .comment-columns {
   column-count: 1;
   column-gap: 0;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
   .pagination {
