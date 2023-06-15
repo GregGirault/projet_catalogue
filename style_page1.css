@@ -368,6 +368,7 @@ header nav ul li a:hover {
   body {
     padding-top: 20px;
     /* overflow: scroll; */
+    height: 130vh;
   }
 
   h1 {
@@ -402,6 +403,10 @@ header nav ul li a:hover {
     height: auto;
   }
 
+  .card-image a{
+    pointer-events: none;
+  }
+
   header nav ul {
     margin-top: 10px;
   }
@@ -416,6 +421,8 @@ header nav ul li a:hover {
   }
 
   .avis input[type="text"] {
+    position: absolute;
+    top: 150px;
   display: block;
   margin: auto;
   text-align: center;
@@ -424,18 +431,22 @@ header nav ul li a:hover {
 }
 
 .avis input[type="submit"]{
-  margin-right: 30px;
+  position: absolute;
+  top: 150px;
+  left: 30px;
+  margin-top: 50px;
 }
 
-.avis input[type="text"],
-.avis input[type="submit"],
-.stars {
-  margin-top: 10px;
+.stars{
+  position: absolute;
+  top: 180px;
+  display: flex;
+  flex-direction: row;
 }
 
 
   .slide-content {
-    margin-bottom: -80px;
+    margin-bottom: 180px;
     max-height: 160px;
     overflow: hidden;
   }
@@ -496,7 +507,7 @@ header nav ul li a:hover {
 
   .toast {
     bottom: 20px;
-    left: 50%;
+    left: 1%;
     transform: none;
   }
 }

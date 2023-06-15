@@ -63,7 +63,7 @@ h1::after {
 
 .row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 40% 40% 40% 40%;
   justify-content: space-around;
   align-items: center;
@@ -83,6 +83,7 @@ h1::after {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   background: #ffffffa8;
+  max-width: 25vw;
 }
 
 .row .gallery-item::after {

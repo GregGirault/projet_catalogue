@@ -71,7 +71,7 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
     <div class="card-container">
         <div class="card">
             <div class="card-image" id="productImage">
-                <a href="<?php echo $produit['image']; ?>" data-lightbox="gallery">
+                <a href="image/<?php echo $produit['image']; ?>" data-lightbox="gallery">
                     <img src="image/<?php echo $produit['image']; ?>" alt="parfum rosalie">
                 </a>
             </div>
@@ -149,7 +149,7 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
         <div class="notes-contenaire">
             <div class="notes">
                 <form method="post" action="">
-                    <div class="stars">
+                    <div class="stars" id="starsContainer">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -213,11 +213,13 @@ $nombreDePages = ceil(count($commentaires_list) / $commentairesParPage);
             const showMoreButton = document.getElementById('showMore');
             const slideContent = document.querySelector('.slide-content');
             const productImage = document.getElementById('productImage');
+            const starsContainer = document.getElementById('starsContainer');
 
             showMoreButton.addEventListener('click', function(event) {
                 event.preventDefault();
                 slideContent.classList.toggle('expanded');
                 productImage.style.display = slideContent.classList.contains('expanded') ? 'none' : 'block';
+                starsContainer.style.top = slideContent.classList.contains('expanded') ? '260px' : '180px';
 
                 if (slideContent.classList.contains('expanded')) {
                     showMoreButton.textContent = 'Afficher moins';
