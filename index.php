@@ -4,7 +4,7 @@ require_once("connect.php");
 
 $adminIP = $_SERVER['REMOTE_ADDR'];
 
-if ($adminIP === "127.0.0.1") {
+if ($adminIP === "90.63.192.240") {
     $showLoginButton = true;
 } else {
     $showLoginButton = false;
