@@ -81,13 +81,24 @@ body {
   letter-spacing: 1.5px;
 }
 @media screen and (max-width: 460px) {
-  .gallery-link button {
+  /* .gallery-link button {
     position: absolute;
     top: calc(50% + 230px);
     left: calc(50% - 145px);
     font-size: 10px;
     padding: 5px 10px;
-  }
+  } */
+
+  .gallery-link .gallery-button {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 60px; 
+  height: 60px; 
+  padding: 10px;
+  font-size: 10px;
+}
+
 
   .gallery-button:hover {
     transform: scale(0.8);
