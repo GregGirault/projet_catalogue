@@ -59,3 +59,64 @@ input[type="submit"]:hover {
   border: 1px solid #53af57;
   transition: background-color 0.3s ease;
 }
+
+a.button {
+  color: #666;
+  display: inline-block;
+  padding: 8px 12px;
+  text-decoration: none;
+  transition: 0.3s ease-in;
+}
+
+a.button:hover {
+  background: #8888889d;
+  border-radius: 4px;
+  color: #fff;
+}
+
+
+@media screen and (min-width: 619px) and (max-width: 890px){
+
+body{
+  overflow-x: hidden;
+}
+
+  #container{
+    width: 100%;
+    height: auto;
+    margin-left: 25%;
+  }
+
+  #container h1{
+    width: 100%;
+  }
+
+  form{
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 460px) {
+
+body{
+  max-height: auto;
+}
+
+  #container {
+  width: 80%;
+  margin-right: 18%;
+  
+}
+
+  form {
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  #container h1 {
+    width: 60%;
+  }
+}

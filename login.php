@@ -21,7 +21,7 @@
 
  <input type="submit" id='submit' value='LOGIN' >
 
- <a href="index.php">retour index</a>
+ <a href="index.php" class="button">retour index</a>
 
  <?php
  if(isset($_GET['erreur'])){

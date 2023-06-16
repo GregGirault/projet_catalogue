@@ -64,9 +64,6 @@ $query->bindValue(':parpage', $parPage, PDO::PARAM_INT);
 $query->execute();
 $articles = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
 require_once("close.php");
 ?>
 
@@ -82,94 +79,230 @@ require_once("close.php");
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Historique des changements</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-    <?php if (isset($_SESSION["toast_message"]) && isset($_SESSION["toast_type"])) : ?>
-        <script>
-            // Affiche un toast avec un message
-            document.addEventListener('DOMContentLoaded', function() {
-                Toastify({
-                    text: "<?php echo $_SESSION["toast_message"]; ?>",
-                    duration: 3000,
-                    destination: "https://github.com/apvarun/toastify-js",
-                    newWindow: true,
-                    close: true,
-                    gravity: "top",
-                    position: "center",
-                    image: "center",
-                    stopOnFocus: true,
-                    style: {
-                        background: "linear-gradient(45deg, #555, #333)",
-                        borderRadius: "10px",
-                        textAlign: "center",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        border: "1px solid white",
-                        opacity: "0.95"
-                    },
-                    onClick: function() {}
-                }).showToast();
-            });
-        </script>
-    <?php
-        unset($_SESSION["toast_message"]);
-        unset($_SESSION["toast_type"]);
-    endif;
-    ?>
+    <style>
+        @media (max-width: 767px) {
+            .text-4xl {
+                font-size: 2rem;
+            }
+            .w-64 {
+                width: 100%;
+            }
+            .mt-1 {
+                margin-top: 0.25rem;
+            }
+            .min-h-screen {
+                min-height: calc(100vh - 2rem);
+            }
+            .border-b-4 {
+                border-bottom-width: 2px;
+            }
+            .pb-2 {
+                padding-bottom: 0.5rem;
+            }
+            .overflow-x-auto {
+                overflow-x: scroll;
+            }
+            .my-10 {
+                margin-top: 2.5rem;
+                margin-bottom: 2.5rem;
+            }
+            .mx-2 {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+            .leading-tight {
+                line-height: 1.25rem;
+            }
+            .text-gray-700 {
+                color: #4a5568;
+            }
+            .hover:underline {
+                text-decoration: underline;
+            }
+            .hover:bg-blue-400 {
+                background-color: #90cdf4;
+            }
+            .hover:text-white {
+                color: #fff;
+            }
+            .rounded {
+                border-radius: 0.25rem;
+            }
+            .mt-4 {
+                margin-top: 1rem;
+            }
+            .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+                --tw-space-x-reverse: 0;
+                margin-right: calc(1rem * var(--tw-space-x-reverse));
+                margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+            }
+            .pagination-item {
+                display: inline-block;
+            }
+            .disabled {
+                pointer-events: none;
+                opacity: 0.5;
+            }
+            .bg-gradient-to-r {
+                background-image: linear-gradient(to right, var(--tw-gradient-stops));
+            }
+            .from-gray-300 {
+                --tw-gradient-stops: var(--tw-gradient-from), #e2e8f0;
+            }
+            .to-gray-400 {
+                --tw-gradient-stops: var(--tw-gradient-to), #cbd5e1;
+            }
+            .text-blue-500 {
+                --tw-text-opacity: 1;
+                color: rgba(59, 130, 246, var(--tw-text-opacity));
+            }
+            .text-blue-700 {
+                --tw-text-opacity: 1;
+                color: rgba(59, 130, 246, var(--tw-text-opacity));
+            }
+            .pagination-link {
+                display: inline-block;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+                padding-top: 0.375rem;
+                padding-bottom: 0.375rem;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+                text-align: center;
+                background-color: transparent;
+                border-radius: 0.25rem;
+                color: #4a5568;
+            }
+            .active {
+                --tw-text-opacity: 1;
+                color: rgba(75, 85, 99, var(--tw-text-opacity));
+                font-weight: 700;
+                text-decoration: underline;
+            }
+            .pagination-link:hover {
+                --tw-bg-opacity: 1;
+                background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
+            }
+            .text-red-500 {
+                --tw-text-opacity: 1;
+                color: rgba(239, 68, 68, var(--tw-text-opacity));
+            }
+            .bg-red-500 {
+                --tw-bg-opacity: 1;
+                background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
+            }
+            .bg-red-700 {
+                --tw-bg-opacity: 1;
+                background-color: rgba(220, 38, 38, var(--tw-bg-opacity));
+            }
+            .bg-green-500 {
+                --tw-bg-opacity: 1;
+                background-color: rgba(52, 211, 153, var(--tw-bg-opacity));
+            }
+            .mt-5 {
+                margin-top: 1.25rem;
+            }
+            .ml-6 {
+                margin-left: 1.5rem;
+            }
+            .text-white {
+                color: #fff;
+            }
+            .py-2 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            .px-4 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .rounded {
+                border-radius: 0.25rem;
+            }
+            .hover:bg-blue-700 {
+                --tw-bg-opacity: 1;
+                background-color: rgba(59, 130, 246, var(--tw-bg-opacity));
+            }
+            .cursor-pointer {
+                cursor: pointer;
+            }
+            .pl-5 {
+                padding-left: 1.25rem;
+            }
+            .btn-confirm {
+                margin-left: 0.75rem;
+                margin-right: 0.75rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                font-weight: 600;
+                background-color: #3b82f6;
+            }
+            .btn-cancel {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                font-weight: 600;
+                color: #ffffff;
+                background-color: #93c5fd;
+            }
+        }
+    </style>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
     <h1 class="text-4xl font-bold mt-8 text-gray-600 tracking-wide leading-tight border-b-4 border-gray-700 pb-2">Historique des ajouts</h1>
 
-    <table class="bg-white shadow-md rounded-lg overflow-hidden my-10 mx-2">
-        <thead>
-            <tr>
-                <th class="px-4 py-2 text-left border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Objet</th>
-                <th class="px-4 py-2 text-left border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Description</th>
-                <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Image</th>
-                <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Catégorie ID</th>
-                <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Modifier / Supprimer</th>
-            </tr>
-
-
-        </thead>
-        <tbody>
-            <?php foreach ($articles as $produit) { ?>
+    <div class="overflow-x-auto">
+        <table class="bg-white shadow-md rounded-lg overflow-hidden my-10 mx-2">
+            <thead>
                 <tr>
-                    <td class="px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
-                        <span><?= $produit['objet'] ?></span>
-                    </td>
-                    <td class="px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
-                        <span><?= $produit['description'] ?></span>
-                    </td>
-                    <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
-                    <img src="image/<?= $produit['image'] ?>" alt="Product Image" class="w-64 h-auto mt-1">
-                    </td>
-                    <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
-                        <span><?= $produit['categorie_id'] ?></span>
-                    </td>
-                    <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
-                        <a class="modify-link btn-modif text-blue-500 hover:underline transition duration-200 hover:bg-blue-400 hover:text-white rounded px-2 py-1 " href="modifier.php?id=<?= $produit['id'] ?>" onclick="modif(event)">Modifier</a>
-                        <a class="delete-link btn-suppr text-red-500 hover:underline transition duration-200 hover:bg-red-400 hover:text-white rounded px-2 py-1" href="supprimer.php?id=<?= $produit['id'] ?>" onclick="supprimer(event)">Supprimer</a>
-                    </td>
+                    <th class="px-4 py-2 text-left border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Objet</th>
+                    <th class="px-4 py-2 text-left border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Description</th>
+                    <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Image</th>
+                    <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Catégorie ID</th>
+                    <th class="text-center px-4 py-2 border-b-2 border-gray-800 font-bold uppercase tracking-wider text-gray-600">Modifier / Supprimer</th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                <?php foreach ($articles as $produit) { ?>
+                    <tr>
+                        <td class="px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                            <span><?= $produit['objet'] ?></span>
+                        </td>
+                        <td class="px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                            <span><?= $produit['description'] ?></span>
+                        </td>
+                        <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                            <img src="image/<?= $produit['image'] ?>" alt="Product Image" class="w-64 h-auto mt-1">
+                        </td>
+                        <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                            <span><?= $produit['categorie_id'] ?></span>
+                        </td>
+                        <td class="text-center px-4 py-2 border-b-2 border-r-2 border-l-2 border-gray-800">
+                            <a class="modify-link btn-modif text-blue-500 hover:underline transition duration-200 hover:bg-blue-400 hover:text-white rounded px-2 py-1 " href="modifier.php?id=<?= $produit['id'] ?>" onclick="modif(event)">Modifier</a>
+                            <a class="delete-link btn-suppr text-red-500 hover:underline transition duration-200 hover:bg-red-400 hover:text-white rounded px-2 py-1" href="supprimer.php?id=<?= $produit['id'] ?>" onclick="supprimer(event)">Supprimer</a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 
     <nav class="flex justify-center mt-4">
         <ul class="pagination flex items-center space-x-4">
             <li class="pagination-item <?php if ($currentPage == 1) echo 'disabled'; ?>">
                 <a href="./historique.php?page=<?php echo $currentPage - 1; ?>" class="pagination-link px-3 py-1.5 bg-gradient-to-r from-gray-300 to-gray-400 rounded text-gray-700 hover:text-white transition duration-200">&laquo; Précédente</a>
             </li>
-
             <?php for ($page = 1; $page <= $pages; $page++) { ?>
                 <li class="pagination-item">
                     <a href="./historique.php?page=<?php echo $page; ?>" class="pagination-link <?php if ($currentPage == $page) echo 'active'; ?> text-blue-500 hover:text-blue-700 hover:underline transition duration-200"><?php echo $page; ?></a>
                 </li>
             <?php } ?>
-
             <li class="pagination-item <?php if ($currentPage == $pages) echo 'disabled'; ?>">
                 <a href="./historique.php?page=<?php echo $currentPage + 1; ?>" class="pagination-link px-3 py-1.5 bg-gradient-to-r from-gray-300 to-gray-400 rounded text-gray-700 hover:text-white transition duration-200">Suivante &raquo;</a>
             </li>
@@ -177,9 +310,9 @@ require_once("close.php");
     </nav>
 
     <div class="flex justify-center mt-4">
-        <a href="ajout.php" class=" mt-5 ml-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">Ajouter</a>
-        <a href="deconnexion.php" class=" mt-5 ml-6 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 cursor-pointer">deconnexion</a>
-        <a href="galerie.php" class=" mt-5 ml-6 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 cursor-pointer">galerie</a>
+        <a href="ajout.php" class="mt-5 ml-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">Ajouter</a>
+        <a href="deconnexion.php" class="mt-5 ml-6 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 cursor-pointer">Déconnexion</a>
+        <a href="galerie.php" class="mt-5 ml-6 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 cursor-pointer">Galerie</a>
     </div>
 
     <br><br>
@@ -251,8 +384,6 @@ require_once("close.php");
             document.body.prepend(confirmationBox);
         }
     </script>
-
-    <?php require_once("close.php"); ?>
 </body>
 
 </html>
