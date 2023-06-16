@@ -527,7 +527,7 @@ header nav ul li a:hover {
   }
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 810px) {
   #newsletter-toast{
     display: none;
   }
@@ -546,6 +546,10 @@ header nav ul li a:hover {
   .aviis{
     position: absolute;
     left: 220px;
+  }
+
+    .card-image a{
+    pointer-events: none;
   }
 
 }

@@ -33,7 +33,7 @@ if ($adminIP === "127.0.0.1") {
                 
 </a>
         <?php } ?>
-        <img class="fond" src="Devouvez nos destination de reve ! (1).svg">
+        <!-- <img class="fond" src="Devouvez nos destination de reve ! (1).svg"> -->
         <a href="galerie.php" class="gallery-link">
             <button class="gallery-button">Accéder à la galerie</button>
         </a>

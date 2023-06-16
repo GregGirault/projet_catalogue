@@ -8,6 +8,10 @@
 body {
   overflow-x: hidden;
   position: relative;
+  background: url(./wepik-export-20230616075325yiGE.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 .fa-right-to-bracket {
