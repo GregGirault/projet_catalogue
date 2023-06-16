@@ -19,9 +19,7 @@ if ($adminIP === "127.0.0.1") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>detour</title>
 </head>
 
@@ -30,15 +28,17 @@ if ($adminIP === "127.0.0.1") {
         <?php if ($showLoginButton) { ?>
             <a href="login.php">
                 <i class="fa-solid fa-right-to-bracket"></i>
-                
-</a>
+            </a>
         <?php } ?>
-        <img class="fond" src="./parfum_1080p.png">
+        <div class="image-container">
+            <img class="fond" src="./parfum_1080p.png">
+        </div>
         <a href="galerie.php" class="gallery-link">
             <button class="gallery-button">Accéder à la galerie</button>
         </a>
     </div>
+
+
 </body>
 
 </html>
-
