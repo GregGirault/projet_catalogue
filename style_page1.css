@@ -527,7 +527,7 @@ header nav ul li a:hover {
   }
 }
 
-@media screen and (max-width: 810px) {
+@media screen and (min-width: 650px) {
   #newsletter-toast{
     display: none;
   }
@@ -546,10 +546,40 @@ header nav ul li a:hover {
   .aviis{
     position: absolute;
     left: 220px;
+    top: 94vh;
   }
 
     .card-image a{
     pointer-events: none;
   }
+  .comment-bubble {
+    position: relative;
+    bottom: -55vh;
+    top: 65vh;
+    padding: 20px;
+    
+    border-radius: 10px;
+  }
 
+  .avis {
+    position: relative;
+    bottom: -10vh;
+    left: 9em;
+  }
+
+  .pagination{
+    top: 45vh;
+    left: 120px;
+  }
+ .stars{
+  position: relative;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffd700;
+  margin-right: 10px;
+  top: 11vh;
+  left: 6em;
 }
+ }
+
