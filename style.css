@@ -1,14 +1,10 @@
 .fond {
-  /* position: absolute; */
   width: 100vw;
-  /* transform: translateX(-50%);
-  left: 50%;
-} */
+  margin-bottom: -25px;
 }
 body {
-  
+  margin: 0;
   overflow-x: hidden;
-  
 }
 
 .fa-right-to-bracket {
@@ -29,7 +25,6 @@ body {
   transition: box-shadow 0.3s ease-in-out;
   animation: rotate 1s;
 }
-
 
 @keyframes bounce {
   0% {
@@ -60,20 +55,23 @@ body {
 
 .gallery-button {
   position: absolute;
-  top: calc(50% + 900px);
-  left: calc(50% - 430px);
-  padding: 10px 20px;
+  top: 40%;
+  left: 10%;
+  width: 120px; 
+  height: 120px; 
+  padding: 10px;
   font-size: 16px;
-  background-color: #FFBD59;
+  background-color: #cead6a;
   color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   cursor: pointer;
   z-index: 2;
   transition: all 0.3s ease-in-out;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
+
 
 .gallery-button:hover {
   background-color: transparent;
@@ -89,35 +87,32 @@ body {
     left: calc(50% - 145px);
     font-size: 10px;
     padding: 5px 10px;
-
   }
 
-
-  .gallery-button:hover{
+  .gallery-button:hover {
     transform: scale(0.8);
     background-color: none;
     letter-spacing: normal;
   }
 
-  .fa-right-to-bracket{
+  .fa-right-to-bracket {
     font-size: 20px;
     top: 40px;
     right: 20px;
   }
-  
 }
 
-@media screen and (max-width: 690px){
+@media screen and (max-width: 690px) {
   .gallery-button {
     position: absolute;
     top: calc(50% + 380px);
     left: calc(50% - 220px);
     font-size: 14px;
     padding: 5px 10px;
-}
-  .fa-right-to-bracket{
+  }
+  .fa-right-to-bracket {
     font-size: 50px;
     top: 50px;
-  right: 25px;
+    right: 25px;
   }
 }
