@@ -1,16 +1,13 @@
 .fond {
-  position: absolute;
-  width: 270vw;
-  transform: translateX(-50%);
+  /* position: absolute; */
+  width: 100vw;
+  /* transform: translateX(-50%);
   left: 50%;
+} */
 }
-
 body {
+  
   overflow-x: hidden;
-  position: relative;
-  background: url(./wepik-export-20230616075325yiGE.png);
-  background-repeat: no-repeat;
-  background-size: cover;
   
 }
 
