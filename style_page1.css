@@ -525,5 +525,27 @@ header nav ul li a:hover {
   #newsletter-toast {
     display: none;
   }
+}
+
+@media screen and (max-width: 690px) {
+  #newsletter-toast{
+    display: none;
+  }
+
+  .pagination{
+    top: 130px;
+    left: 180px;
+  }
+
+  .comment-columns{
+    position: absolute;
+    right: 50px;
+    top: 70px;
+  }
+
+  .aviis{
+    position: absolute;
+    left: 220px;
+  }
 
 }
