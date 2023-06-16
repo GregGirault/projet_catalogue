@@ -80,6 +80,8 @@ body {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.12);
   letter-spacing: 1.5px;
 }
+
+
 @media screen and (max-width: 460px) {
   body {
     background: url(./mobile.png);
@@ -96,7 +98,7 @@ body {
     height: 60px;
     padding: 10px;
     font-size: 10px;
-    top: 105px; 
+    top: 130px; 
     left: 50%; 
     transform: translateX(-50%); 
   }
@@ -122,24 +124,39 @@ body {
 
 
 
-@media screen and (max-width: 690px) {
+@media screen and (min-width: 619px) and (max-width: 890px) {
   body {
-    background: url(./mobile.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 107vh;
-    overflow: hidden; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .gallery-link .gallery-button {
+    display: block;
+    position: fixed;
+    top: 180px;
+    left: 20%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    padding: 5px 10px;
+    z-index: 1;
+  }
+
+  .fa-right-to-bracket {
+    display: block;
+    position: fixed;
+    top: 50px;
+    right: 25px;
+    font-size: 50px;
+    z-index: 1;
   }
 
   .fond {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+    width: 100%;
+    height: 100%;
   }
 }
-
