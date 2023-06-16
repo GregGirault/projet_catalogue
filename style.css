@@ -96,8 +96,10 @@ body {
     height: 60px;
     padding: 10px;
     font-size: 10px;
+    top: 105px; 
+    left: 50%; 
+    transform: translateX(-50%); 
   }
-
 
   .image-container {
     display: none;
@@ -107,10 +109,8 @@ body {
     display: none;
   }
 
-  .gallery-button:hover {
-    transform: scale(0.8);
-    background-color: none;
-    letter-spacing: normal;
+  .gallery-button {
+   transform: none;
   }
 
   .fa-right-to-bracket {
@@ -121,17 +121,25 @@ body {
 }
 
 
+
 @media screen and (max-width: 690px) {
-  .gallery-button {
-    position: absolute;
-    top: calc(50% + 380px);
-    left: calc(50% - 220px);
-    font-size: 14px;
-    padding: 5px 10px;
+  body {
+    background: url(./mobile.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 107vh;
+    overflow: hidden; 
   }
-  .fa-right-to-bracket {
-    font-size: 50px;
-    top: 50px;
-    right: 25px;
+
+  .fond {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
   }
 }
+
