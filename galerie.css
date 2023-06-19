@@ -192,7 +192,7 @@ a {
   overflow: hidden;
 }
 
-.gallery-filter a:before,
+
 .gallery-filter a:before {
   content: "";
   position: absolute;
@@ -204,23 +204,16 @@ a {
   visibility: hidden;
   transform: scaleX(0);
   transition: all 0.3s ease-in-out;
-}
-
-.gallery-filter a:before {
   transform-origin: left;
-}
-
-.gallery-filter a:before {
   transform-origin: right;
 }
 
-.gallery-filter a:hover:before,
 .gallery-filter a:hover:before {
   visibility: visible;
   transform: scaleX(1);
 }
 
-.gallery-filter a:after,
+
 .gallery-filter a:after {
   position: absolute;
   top: 0;
@@ -233,7 +226,7 @@ a {
   transition: opacity 0.3s ease-in-out;
 }
 
-.gallery-filter a:hover:after,
+
 .gallery-filter a:hover:after {
   visibility: visible;
   opacity: 1;
