@@ -309,9 +309,10 @@ header nav ul li a:hover {
 
 .pagination {
   position: relative;
-  bottom: 70px;
-  margin-top: 390px;
-  text-align: center;
+  bottom: 6vh;
+  margin-top: 24vw;
+  right: 6vw;
+  text-align: right;
 }
 
 .pagination a {
