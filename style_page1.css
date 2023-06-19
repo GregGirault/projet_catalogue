@@ -139,7 +139,7 @@ header {
   left: 0;
   width: 100%;
   z-index: 2;
-  transition: background 0.3s ease-in-out;
+  transition:  0.3s ease-in-out;
 }
 
 header h1 {
@@ -547,7 +547,7 @@ header nav ul li a:hover {
   .aviis{
     position: absolute;
     left: 220px;
-    top: 94vh;
+    top: 96vh;
   }
 
     .card-image a{
@@ -556,7 +556,7 @@ header nav ul li a:hover {
   .comment-bubble {
     position: relative;
     bottom: -55vh;
-    top: 65vh;
+    top: 66vh;
     padding: 20px;
     
     border-radius: 10px;
@@ -569,7 +569,8 @@ header nav ul li a:hover {
   }
 
   .pagination{
-    top: 45vh;
+    position: relative;
+    top: 64vh;
     left: 120px;
   }
  .stars{
